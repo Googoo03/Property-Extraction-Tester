@@ -13,104 +13,101 @@ tree = parser.parse(code)
 root = tree.root_node
 
 # Output containers
-functions = []
-classes = []
-imports = []
-calls = []
-assignments = []
-branches = []
-loops = []
-side_effects = []
-dangerous = []
-definitions = set()
-uses = set()
+structure = {
+    "functions": [],
+    "branches": [],
+    "loops": [],
+    "returns": []
+}
+
+properties = []
+
 
 # Utility: get node text
 def text(node):
     return code[node.start_byte:node.end_byte].decode()
 
-# Walk Tree-Sitter CST
-def walk(node):
-    node_type = node.type
+def append_to_properties():
+    properties.append({
+        "scope": "branch",
+        "function": "normalize",
+        "property": "preserves_length",
+        "formal": "len(output) == len(xs)"
+    })
 
-    # Functions
-    if node_type == "function_definition":
-        name = node.child_by_field_name("name")
-        if name:
-            functions.append(text(name))
+def get_if_statements(node, current_function):
+    cond = node.child_by_field_name("condition")
+    condition_text = cond.text.decode()
+    structure["branches"].append(condition_text)
 
-    # Classes
-    if node_type == "class_definition":
-        name = node.child_by_field_name("name")
-        if name:
-            classes.append(text(name))
+    # Branch-level property
+    properties.append({
+        "scope": "branch",
+        "function": current_function,
+        "condition": condition_text,
+        "property": "branch_specific_behavior",
+        "formal": "output behavior depends on condition"
+    })
 
-    # Imports
-    if node_type in ("import_statement", "import_from_statement"):
-        imports.append(text(node))
+def get_functions(node):
+    name_node = node.child_by_field_name("name")
+    func_name = name_node.text.decode()
+    structure["functions"].append(func_name)
 
-    # Assignments
-    if node_type == "assignment":
-        lhs = node.child_by_field_name("left")
-        rhs = node.child_by_field_name("right")
-        if lhs:
-            assignments.append(text(lhs))
-            definitions.add(text(lhs))
-        if rhs:
-            uses.add(text(rhs))
+    # Function-level property
+    properties.append({
+        "scope": "function",
+        "function": func_name,
+        "property": "preserves_length",
+        "formal": "len(output) == len(input)"
+    })
 
-    # Function calls
-    if node_type == "call":
-        fn = node.child_by_field_name("function")
-        if fn:
-            fn_name = text(fn)
-            calls.append(fn_name)
 
-            # Side effect detection
-            if fn_name in ("open", "print"):
-                side_effects.append(("io", fn_name))
-            if "requests" in fn_name or "socket" in fn_name:
-                side_effects.append(("network", fn_name))
-            if "subprocess" in fn_name:
-                side_effects.append(("subprocess", fn_name))
 
-            # Dangerous ops
-            if fn_name in ("eval", "exec"):
-                dangerous.append(fn_name)
+def walk(node, current_function=None):
+    # Detect function definitions
+    if node.type == "function_definition":
+        get_functions(node)
+        name_node = node.child_by_field_name("name")
+        func_name = name_node.text.decode()
+        current_function = func_name
 
-    # Branching (CFG hint)
-    if node_type in ("if_statement", "try_statement"):
-        branches.append(text(node))
+    # Detect IF branches
+    if node.type == "if_statement":
+        get_if_statements(node, current_function)
 
-    # Loops
-    if node_type in ("for_statement", "while_statement"):
-        loops.append(text(node))
+    # Detect loops
+    if node.type in ("for_statement", "while_statement", "list_comprehension"):
+        structure["loops"].append(node.type)
 
-    # Identifier usage
-    if node_type == "identifier":
-        uses.add(text(node))
+        # Loop invariant property
+        properties.append({
+            "scope": "loop",
+            "function": current_function,
+            "property": "loop_invariant",
+            "formal": "iteration preserves semantic rule"
+        })
 
-    for c in node.children:
-        walk(c)
+    # Detect return statements
+    if node.type == "return_statement":
+        return_text = node.text.decode()
+        structure["returns"].append(return_text)
 
+        # Post-condition property
+        properties.append({
+            "scope": "return",
+            "function": current_function,
+            "property": "return_postcondition",
+            "formal": f"returns value satisfying expected semantics: {return_text}"
+        })
+
+    # Recurse
+    for child in node.children:
+        walk(child, current_function)
+        
 walk(root)
+print("\n=== STRUCTURE ===")
+print(json.dumps(structure, indent=2))
 
-# Build call graph edges
-call_graph = [{"caller": f, "calls": calls} for f in functions]
-
-# Semantic summary JSON
-output = {
-    "functions": sorted(set(functions)),
-    "classes": sorted(set(classes)),
-    "imports": imports,
-    "assignments": assignments,
-    "definitions": list(definitions),
-    "uses": list(uses),
-    "call_graph": call_graph,
-    "branches": len(branches),
-    "loops": len(loops),
-    "side_effects": side_effects,
-    "dangerous_calls": dangerous
-}
-
-print(json.dumps(output, indent=2))
+print("\n=== SEMANTIC PROPERTIES ===")
+print(json.dumps(properties, indent=2))
