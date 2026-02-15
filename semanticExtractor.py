@@ -1,14 +1,16 @@
 from tree_sitter import Language, Parser
 import tree_sitter_python as tspython
 import json
+import openroutertest
+from openroutertest import AI_semantic_update
 
 PY_LANG = Language(tspython.language())
 
 # Initialize parser
 parser = Parser(PY_LANG)
-
+file_path = "dataset/python_programs/normalize.py"
 # Load Python file
-code = open("dataset/python_programs/ad_mix.py", "rb").read()
+code = open(file_path, "rb").read()
 tree = parser.parse(code)
 root = tree.root_node
 
@@ -111,3 +113,6 @@ print(json.dumps(structure, indent=2))
 
 print("\n=== SEMANTIC PROPERTIES ===")
 print(json.dumps(properties, indent=2))
+
+print("\n=== AI ===")
+AI_semantic_update(file_path, structure)
