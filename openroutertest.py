@@ -2,9 +2,9 @@ import requests
 import json
 
 #Function that updates the structure JSON with AI generate preconditions, conditions, and formal definitions
-def AI_semantic_update(file_path, structure):
+def AI_semantic_update(file_path, properties):
     #Convert structure dict to string
-    structure_str = str(structure)
+    properties_str = str(properties)
 
     #convert python file being tested  to string
     try:
@@ -22,14 +22,17 @@ def AI_semantic_update(file_path, structure):
         print(f"An error occurred: {e}")
 
     #create user input here:
-    user_input = file_content+"\n I am testing this python file, update or add the preconditions, conditions, and formal definitions for each test case in this JSON file:\n"+structure_str
+    user_input = file_content+"\n I am testing this python file, update or add the preconditions, conditions, and formal definitions for each test case in this JSON file and return to me just the JSON:\n"+properties_str
+    print("User:\n"+user_input)
+
+    #call api
     data = apicall(user_input).json()
 
     # Line below prints entire API request
     # print(json.dumps(data, indent=2))
 
     #Gets the response from the agent
-    print(data['output'][0]['content'][0]['text'])
+    print("Agent:\n"+data['output'][0]['content'][0]['text'])
     return data['output'][0]['content'][0]['text']
 
 

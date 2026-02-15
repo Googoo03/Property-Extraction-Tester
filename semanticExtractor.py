@@ -115,4 +115,4 @@ print("\n=== SEMANTIC PROPERTIES ===")
 print(json.dumps(properties, indent=2))
 
 print("\n=== AI ===")
-AI_semantic_update(file_path, structure)
+AI_semantic_update(file_path, properties)
