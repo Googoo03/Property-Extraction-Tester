@@ -2,7 +2,7 @@ from tree_sitter import Language, Parser
 import tree_sitter_python as tspython
 import json
 import openroutertest
-from openroutertest import AI_semantic_update
+from openroutertest import AI_semantic_update, GenerateHypothesisTests
 
 PY_LANG = Language(tspython.language())
 
@@ -115,4 +115,14 @@ print("\n=== SEMANTIC PROPERTIES ===")
 print(json.dumps(properties, indent=2))
 
 print("\n=== AI ===")
-AI_semantic_update(file_path, properties)
+properties = AI_semantic_update(file_path, properties)
+
+print("=== NEW PROPS ===\n")
+print(json.dumps(properties, indent=2))
+
+print("=== GENERATE HYPOTHESIS TESTS ===\n")
+hypothesisTests = GenerateHypothesisTests(properties)
+
+print("=== SAVING TESTS AS FILE ===\n")
+with open("hypothesisTests.py","w",encoding="utf-8") as f:
+    f.write(str(hypothesisTests))
