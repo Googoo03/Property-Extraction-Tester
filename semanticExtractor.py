@@ -124,5 +124,5 @@ print("=== GENERATE HYPOTHESIS TESTS ===\n")
 hypothesisTests = GenerateHypothesisTests(properties)
 
 print("=== SAVING TESTS AS FILE ===\n")
-with open("hypothesisTests.py","w",encoding="utf-8") as f:
+with open("tests\hypothesis_test.py","w",encoding="utf-8") as f:
     f.write(str(hypothesisTests))

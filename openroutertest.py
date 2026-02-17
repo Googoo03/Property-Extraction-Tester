@@ -44,7 +44,7 @@ def GenerateHypothesisTests(properties):
     properties_str = str(properties)
     
     #Generate a python file to run hypothesis tests
-    user_input = "I am using hypothesis to perform tests on python functions. Please make a dedicated hypothesis test for each semantic property in this included JSON format. Return to me only the completed python file. Assume hypothesis and pytest are already installed. Assume the tested function is found in dataset\python_programs\**insert function name**\n" + properties_str
+    user_input = "I am using hypothesis to perform tests on python functions. Please make a dedicated hypothesis test for each semantic property in this included JSON format. Return to me only the completed python file. Assume hypothesis and pytest are already installed. Assume the tested function is found in dataset\python_programs\**insert function name**. As a decorator, please do NOT include '@settings(suppress_health_check=[HealthCheck.too_slow])'.\n" + properties_str
     
     #call api
     data = apicall(user_input)
