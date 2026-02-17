@@ -61,10 +61,13 @@ def apicall(user_input):
     if user_input == "":
         return None
     
+    with open('api_key.txt', 'r') as f:
+        api_key = f.read().strip()
+    
     response = requests.post(
         'https://openrouter.ai/api/v1/responses',
         headers={
-            'Authorization': 'Bearer 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',
+            'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json',
         },
         json={
