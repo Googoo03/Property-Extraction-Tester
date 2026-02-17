@@ -3,3 +3,4 @@ ENV/
 .pytest_cache/
 api_key.txt
 *.code-workspace
+.hypothesis
