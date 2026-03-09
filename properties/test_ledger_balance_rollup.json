@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "ledger_balance_rollup",
+    "property": "preserves_length",
+    "formal": "len(entries) == len(entries)"
+  },
+  {
+    "scope": "loop",
+    "function": "ledger_balance_rollup",
+    "property": "loop_invariant",
+    "formal": "balance == sum(a for a, k in entries[:i] if k == 'credit') + sum(a for a, k in entries[:i] if k == 'debit')"
+  },
+  {
+    "scope": "branch",
+    "function": "ledger_balance_rollup",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative amount')"
+  },
+  {
+    "scope": "branch",
+    "function": "ledger_balance_rollup",
+    "condition": "kind == 'credit'",
+    "property": "branch_specific_behavior",
+    "formal": "balance += amount"
+  },
+  {
+    "scope": "branch",
+    "function": "ledger_balance_rollup",
+    "condition": "kind == 'debit'",
+    "property": "branch_specific_behavior",
+    "formal": "balance += amount"
+  },
+  {
+    "scope": "branch",
+    "function": "ledger_balance_rollup",
+    "condition": "kind not in ('credit', 'debit')",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('unknown kind')"
+  },
+  {
+    "scope": "return",
+    "function": "ledger_balance_rollup",
+    "property": "return_postcondition",
+    "formal": "returns balance == sum(a for a, k in entries if k == 'credit') + sum(a for a, k in entries if k == 'debit')"
+  }
+]

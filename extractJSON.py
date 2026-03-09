@@ -7,6 +7,8 @@ def getOutputText(response):
     text = extract_text_from_response(response)
     text = clean_llm_text(text)
     
+    print(response)
+    
     parsedText = parse_json_safely(text)
     
     if parsedText is None:

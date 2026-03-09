@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "latencies_merge",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right) - (1 if (left and right and left[-1] == right[-1]) else 0)"
+  },
+  {
+    "scope": "loop",
+    "function": "latencies_merge",
+    "property": "loop_invariant",
+    "formal": "merged == sorted(left[:i] + right[:j])"
+  },
+  {
+    "scope": "branch",
+    "function": "latencies_merge",
+    "condition": "a < b",
+    "property": "branch_specific_behavior",
+    "formal": "output[i] == left[i] and i increments by 1"
+  },
+  {
+    "scope": "branch",
+    "function": "latencies_merge",
+    "condition": "b < a",
+    "property": "branch_specific_behavior",
+    "formal": "output[j] == right[j] and j increments by 1"
+  },
+  {
+    "scope": "branch",
+    "function": "latencies_merge",
+    "condition": "a == b",
+    "property": "branch_specific_behavior",
+    "formal": "output contains both a and b, both i and j increment by 1"
+  },
+  {
+    "scope": "branch",
+    "function": "latencies_merge",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "last element is removed from merged"
+  },
+  {
+    "scope": "return",
+    "function": "latencies_merge",
+    "property": "return_postcondition",
+    "formal": "return value == sorted(left + right) if left[-1] != right[-1] else sorted(left + right)[:-1]"
+  }
+]

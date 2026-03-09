@@ -1,0 +1,42 @@
+[
+  {
+    "scope": "function",
+    "function": "gain_trendline",
+    "property": "preserves_length",
+    "formal": "len(output) == 1"
+  },
+  {
+    "scope": "branch",
+    "function": "gain_trendline",
+    "condition": "x1 == x0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "gain_trendline",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "output clamped to [min(y0,y1), max(y0,y1)]"
+  },
+  {
+    "scope": "branch",
+    "function": "gain_trendline",
+    "condition": "y < lo",
+    "property": "branch_specific_behavior",
+    "formal": "output = lo"
+  },
+  {
+    "scope": "branch",
+    "function": "gain_trendline",
+    "condition": "y > hi",
+    "property": "branch_specific_behavior",
+    "formal": "output = hi"
+  },
+  {
+    "scope": "return",
+    "function": "gain_trendline",
+    "property": "return_postcondition",
+    "formal": "isinstance(return_value, (int, float))"
+  }
+]

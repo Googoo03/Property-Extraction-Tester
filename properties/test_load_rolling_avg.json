@@ -1,0 +1,78 @@
+[
+  {
+    "scope": "function",
+    "function": "load_rolling_avg",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "load_rolling_avg",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "load_rolling_avg",
+    "condition": "not series",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "load_rolling_avg",
+    "condition": "len(tail) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "load_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "load_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return avg"
+  },
+  {
+    "scope": "function",
+    "function": "load_rolling_avg",
+    "property": "exception_raised",
+    "formal": "raises ValueError if window <= 0"
+  },
+  {
+    "scope": "function",
+    "function": "load_rolling_avg",
+    "property": "exception_raised",
+    "formal": "raises ValueError if not series"
+  },
+  {
+    "scope": "function",
+    "function": "load_rolling_avg",
+    "property": "correct_average",
+    "formal": "avg == sum(tail) / window"
+  },
+  {
+    "scope": "function",
+    "function": "load_rolling_avg",
+    "property": "correct_tail",
+    "formal": "tail == series[-window:]"
+  },
+  {
+    "scope": "branch",
+    "function": "load_rolling_avg",
+    "condition": "len(tail) >= warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "load_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "returns float if avg is computed"
+  }
+]

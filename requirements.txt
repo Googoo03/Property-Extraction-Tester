@@ -1,4 +1,5 @@
 tree-sitter
 tree-sitter-python
 hypothesis
+requests
 pytest

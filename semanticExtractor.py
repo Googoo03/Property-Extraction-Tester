@@ -1,18 +1,12 @@
+import argparse
+
 from tree_sitter import Language, Parser
 import tree_sitter_python as tspython
 import json
 import openroutertest
 from openroutertest import AI_semantic_update, GenerateHypothesisTests
 
-PY_LANG = Language(tspython.language())
-
-# Initialize parser
-parser = Parser(PY_LANG)
-file_path = "dataset/python_programs/normalize.py"
-# Load Python file
-code = open(file_path, "rb").read()
-tree = parser.parse(code)
-root = tree.root_node
+properties = []
 
 # Output containers
 structure = {
@@ -21,13 +15,6 @@ structure = {
     "loops": [],
     "returns": []
 }
-
-properties = []
-
-
-# Utility: get node text
-def text(node):
-    return code[node.start_byte:node.end_byte].decode()
 
 def append_to_properties():
     properties.append({
@@ -106,23 +93,52 @@ def walk(node, current_function=None):
     # Recurse
     for child in node.children:
         walk(child, current_function)
+
+def main(file):
+    global properties
+    global structure
+    
+    PY_LANG = Language(tspython.language())
+
+    # Initialize parser
+    parser = Parser(PY_LANG)
+    file_path = "dataset/python_programs/"+file
+    # Load Python file
+    code = open(file_path, "rb").read()
+    tree = parser.parse(code)
+    root = tree.root_node
+    
+    walk(root)
+    print("\n=== STRUCTURE ===")
+    #print(json.dumps(structure, indent=2))
+
+    print("\n=== SEMANTIC PROPERTIES ===")
+    #print(json.dumps(properties, indent=2))
+
+    print("\n=== AI ===")
+    properties = AI_semantic_update(file_path, properties)
+    propertyfileName = file.split(".")[0]+".json"
+    with open("properties/test_" + propertyfileName, "w", encoding="utf-8") as f:
+        json.dump(properties, f, indent=2)
+
+    print("=== NEW PROPS ===\n")
+    #print(json.dumps(properties, indent=2))
+
+    print("=== GENERATE HYPOTHESIS TESTS ===\n")
+    hypothesisTests = GenerateHypothesisTests(file_path,properties)
+
+    print("=== SAVING TESTS AS FILE ===\n")
+    with open("tests/test_"+file,"w",encoding="utf-8") as f:
+        f.write(str(hypothesisTests))
         
-walk(root)
-print("\n=== STRUCTURE ===")
-print(json.dumps(structure, indent=2))
-
-print("\n=== SEMANTIC PROPERTIES ===")
-print(json.dumps(properties, indent=2))
-
-print("\n=== AI ===")
-properties = AI_semantic_update(file_path, properties)
-
-print("=== NEW PROPS ===\n")
-print(json.dumps(properties, indent=2))
-
-print("=== GENERATE HYPOTHESIS TESTS ===\n")
-hypothesisTests = GenerateHypothesisTests(properties)
-
-print("=== SAVING TESTS AS FILE ===\n")
-with open("tests\hypothesis_test.py","w",encoding="utf-8") as f:
-    f.write(str(hypothesisTests))
+if __name__ == "__main__":
+    p = argparse.ArgumentParser()
+    p.add_argument("--testFile", default=None, help="test file in dataset/python_programs")
+    
+    args = p.parse_args()
+    
+    if args.testFile is None:
+        print("testFile argument is null.")
+        exit(1)
+        
+    main(args.testFile)

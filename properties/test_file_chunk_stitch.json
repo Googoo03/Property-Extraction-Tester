@@ -1,0 +1,27 @@
+[
+  {
+    "scope": "function",
+    "function": "file_chunk_stitch",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "file_chunk_stitch",
+    "condition": "not chunks",
+    "property": "branch_specific_behavior",
+    "formal": "output == b\"\""
+  },
+  {
+    "scope": "return",
+    "function": "file_chunk_stitch",
+    "property": "return_postcondition",
+    "formal": "output == data[:-1]"
+  },
+  {
+    "scope": "loop",
+    "function": "file_chunk_stitch",
+    "property": "loop_invariant",
+    "formal": "len(data) == sum(len(part) for _, part in chunks[:i])"
+  }
+]

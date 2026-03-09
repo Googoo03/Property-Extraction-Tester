@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "grant_share",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "grant_share",
+    "condition": "len(ratios) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'no ratios'"
+  },
+  {
+    "scope": "branch",
+    "function": "grant_share",
+    "condition": "sum(ratios) <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'invalid ratios'"
+  },
+  {
+    "scope": "branch",
+    "function": "grant_share",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'negative amount'"
+  },
+  {
+    "scope": "loop",
+    "function": "grant_share",
+    "property": "loop_invariant",
+    "formal": "sum(base) == amount"
+  },
+  {
+    "scope": "return",
+    "function": "grant_share",
+    "property": "return_postcondition",
+    "formal": "all(share >= -fee for share in output)"
+  },
+  {
+    "scope": "loop",
+    "function": "grant_share",
+    "property": "loop_invariant",
+    "formal": "all(r >= 0 for r in ratios) or (sum(ratios) > 0)"
+  }
+]

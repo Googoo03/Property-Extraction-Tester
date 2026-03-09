@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "guard_write",
+    "property": "preserves_length",
+    "formal": "len(timestamps) == len(timestamps)"
+  },
+  {
+    "scope": "loop",
+    "function": "guard_write",
+    "property": "loop_invariant",
+    "formal": "len([t for t in timestamps if t >= now - window]) <= limit"
+  },
+  {
+    "scope": "branch",
+    "function": "guard_write",
+    "condition": "len(recent) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0)"
+  },
+  {
+    "scope": "branch",
+    "function": "guard_write",
+    "condition": "len(recent) <= limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (True, limit - len(recent))"
+  },
+  {
+    "scope": "return",
+    "function": "guard_write",
+    "property": "return_postcondition",
+    "formal": "output == (False, 0) if len([t for t in timestamps if t >= now - window]) > limit else (True, limit - len([t for t in timestamps if t >= now - window]))"
+  }
+]
