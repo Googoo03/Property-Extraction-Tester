@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "payment_split_rebate",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "payment_split_rebate",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative total')"
+  },
+  {
+    "scope": "branch",
+    "function": "payment_split_rebate",
+    "condition": "not ratios or sum(ratios) <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid ratios')"
+  },
+  {
+    "scope": "return",
+    "function": "payment_split_rebate",
+    "property": "return_postcondition",
+    "formal": "sum(output) == total - rebate"
+  },
+  {
+    "scope": "loop",
+    "function": "payment_split_rebate",
+    "property": "loop_invariant",
+    "formal": "each element of output == (ratios[i] / sum(ratios)) * total - rebate"
+  }
+]

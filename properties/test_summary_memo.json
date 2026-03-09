@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "summary_memo",
+    "property": "preserves_length",
+    "formal": "len(entries) == len(entries)"
+  },
+  {
+    "scope": "branch",
+    "function": "summary_memo",
+    "condition": "key not in entries",
+    "property": "branch_specific_behavior",
+    "formal": "output is None if key not in entries"
+  },
+  {
+    "scope": "return",
+    "function": "summary_memo",
+    "property": "return_postcondition",
+    "formal": "returns None if key not in entries"
+  },
+  {
+    "scope": "branch",
+    "function": "summary_memo",
+    "condition": "now > expires_at",
+    "property": "branch_specific_behavior",
+    "formal": "output is None if now > expires_at"
+  },
+  {
+    "scope": "return",
+    "function": "summary_memo",
+    "property": "return_postcondition",
+    "formal": "returns None if now > expires_at"
+  },
+  {
+    "scope": "return",
+    "function": "summary_memo",
+    "property": "return_postcondition",
+    "formal": "returns value if key in entries and now <= expires_at"
+  }
+]

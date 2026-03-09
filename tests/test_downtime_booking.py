@@ -3,7 +3,7 @@ from hypothesis import given, strategies as st
 import pytest
 from dataset.python_programs.downtime_booking import downtime_booking
 
-@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuple(st.integers(), st.integers()))
+@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuples(st.integers(), st.integers()))
 def test_downtime_booking_preserves_length(existing, candidate):
     try:
         output = downtime_booking(existing, candidate)
@@ -11,13 +11,13 @@ def test_downtime_booking_preserves_length(existing, candidate):
     except ValueError:
         pass
 
-@given(candidate=st.tuple(st.integers(), st.integers()))
+@given(candidate=st.tuples(st.integers(), st.integers()))
 def test_downtime_booking_branch_specific_behavior(candidate):
     if candidate[0] >= candidate[1]:
         with pytest.raises(ValueError):
             downtime_booking([], candidate)
 
-@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuple(st.integers(), st.integers()))
+@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuples(st.integers(), st.integers()))
 def test_downtime_booking_loop_invariant(existing, candidate):
     try:
         output = downtime_booking(existing, candidate)
@@ -26,7 +26,7 @@ def test_downtime_booking_loop_invariant(existing, candidate):
     except ValueError:
         pass
 
-@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuple(st.integers(), st.integers()))
+@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuples(st.integers(), st.integers()))
 def test_downtime_booking_branch_specific_behavior_overlap(existing, candidate):
     try:
         output = downtime_booking(existing, candidate)
@@ -38,7 +38,7 @@ def test_downtime_booking_branch_specific_behavior_overlap(existing, candidate):
     except ValueError:
         pass
 
-@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuple(st.integers(), st.integers()))
+@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuples(st.integers(), st.integers()))
 def test_downtime_booking_return_postcondition_false(existing, candidate):
     try:
         output = downtime_booking(existing, candidate)
@@ -48,7 +48,7 @@ def test_downtime_booking_return_postcondition_false(existing, candidate):
     except ValueError:
         pass
 
-@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuple(st.integers(), st.integers()))
+@given(existing=st.lists(st.tuples(st.integers(), st.integers())), candidate=st.tuples(st.integers(), st.integers()))
 def test_downtime_booking_return_postcondition_true(existing, candidate):
     try:
         output = downtime_booking(existing, candidate)

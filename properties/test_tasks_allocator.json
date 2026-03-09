@@ -1,0 +1,54 @@
+[
+  {
+    "scope": "function",
+    "function": "tasks_allocator",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "tasks_allocator",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'total must be non-negative'"
+  },
+  {
+    "scope": "branch",
+    "function": "tasks_allocator",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'minimum must be non-negative'"
+  },
+  {
+    "scope": "branch",
+    "function": "tasks_allocator",
+    "condition": "not weights",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'no weights provided'"
+  },
+  {
+    "scope": "branch",
+    "function": "tasks_allocator",
+    "condition": "not any(weights)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'all weights are zero'"
+  },
+  {
+    "scope": "loop",
+    "function": "tasks_allocator",
+    "property": "loop_invariant",
+    "formal": "each allocation >= minimum and allocation <= total"
+  },
+  {
+    "scope": "loop",
+    "function": "tasks_allocator",
+    "property": "loop_invariant",
+    "formal": "sum of allocations <= total"
+  },
+  {
+    "scope": "return",
+    "function": "tasks_allocator",
+    "property": "return_postcondition",
+    "formal": "returns list of integers where each element is >= minimum and <= total, with length equal to len(weights)"
+  }
+]

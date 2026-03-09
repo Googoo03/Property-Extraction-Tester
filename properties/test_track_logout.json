@@ -1,0 +1,28 @@
+[
+  {
+    "scope": "function",
+    "function": "track_logout",
+    "property": "preserves_length",
+    "formal": "len(counters) == len(counters)"
+  },
+  {
+    "scope": "branch",
+    "function": "track_logout",
+    "condition": "cap is not None",
+    "property": "branch_specific_behavior",
+    "formal": "output == min(updated, cap)"
+  },
+  {
+    "scope": "branch",
+    "function": "track_logout",
+    "condition": "updated > cap",
+    "property": "branch_specific_behavior",
+    "formal": "updated = cap"
+  },
+  {
+    "scope": "return",
+    "function": "track_logout",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return updated"
+  }
+]

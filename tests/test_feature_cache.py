@@ -15,7 +15,7 @@ cache_strategy = st.builds(
     MockCache,
     data=st.dictionaries(
         keys=st.text(),
-        values=st.tuples(st.anything(), st.integers())
+        values=st.tuples(st.one_of(st.none(), st.integers(), st.text(), st.booleans()), st.integers())
     )
 )
 

@@ -3,7 +3,7 @@
     "scope": "function",
     "function": "login_throttle",
     "property": "preserves_length",
-    "formal": "len(timestamps) == len([t for t in timestamps if t >= cutoff]) + len([t for t in timestamps if t < cutoff])"
+    "formal": "len(timestamps) == len([t for t in timestamps if t >= now - window]) + len([t for t in timestamps if t < now - window])"
   },
   {
     "scope": "loop",
@@ -16,19 +16,12 @@
     "function": "login_throttle",
     "condition": "len(recent) > limit",
     "property": "branch_specific_behavior",
-    "formal": "output == (False, 0)"
-  },
-  {
-    "scope": "branch",
-    "function": "login_throttle",
-    "condition": "len(recent) <= limit",
-    "property": "branch_specific_behavior",
-    "formal": "output == (True, limit - len(recent))"
+    "formal": "output == (False, 0) if len(recent) > limit else output == (True, limit - len(recent))"
   },
   {
     "scope": "return",
     "function": "login_throttle",
     "property": "return_postcondition",
-    "formal": "output == (False, 0) if len(recent) > limit else output == (True, limit - len(recent))"
+    "formal": "output == (False, 0) if len([t for t in timestamps if t >= now - window]) > limit else output == (True, limit - len([t for t in timestamps if t >= now - window]))"
   }
 ]

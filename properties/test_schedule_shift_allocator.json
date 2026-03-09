@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "schedule_shift_allocator",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_shift_allocator",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_shift_allocator",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_shift_allocator",
+    "condition": "not weights or sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "schedule_shift_allocator",
+    "property": "loop_invariant",
+    "formal": "each share >= minimum"
+  },
+  {
+    "scope": "return",
+    "function": "schedule_shift_allocator",
+    "property": "return_postcondition",
+    "formal": "all(isinstance(x, int) for x in output) and sum(output) <= total"
+  }
+]

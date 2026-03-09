@@ -1,7 +1,7 @@
 from hypothesis import given
 from hypothesis import strategies as st
 from hypothesis.stateful import RuleBasedStateMachine, rule, invariant, precondition
-from hypothesis.extra.orderedset import ordered_set
+#from hypothesis.extra.orderedset import ordered_set
 
 def dataloader_shard_merge(left_ids, right_ids):
     i = j = 0

@@ -37,7 +37,7 @@ def test_limit_ping_branch_specific_behavior(timestamps, now, window, limit):
 @given(timestamps=st.lists(st.floats(allow_nan=False, allow_infinity=False), min_size=0, max_size=1000),
        now=st.floats(allow_nan=False, allow_infinity=False),
        window=st.floats(allow_nan=False, allow_infinity=False, min_value=0),
-       limit=st.integers(min_value=0, max_size=1000))
+       limit=st.integers(min_value=0, max_value=1000))
 def test_limit_ping_return_postcondition_false(timestamps, now, window, limit):
     window_start = now - window
     recent = [t for t in timestamps if t >= window_start]
@@ -47,7 +47,7 @@ def test_limit_ping_return_postcondition_false(timestamps, now, window, limit):
 @given(timestamps=st.lists(st.floats(allow_nan=False, allow_infinity=False), min_size=0, max_size=1000),
        now=st.floats(allow_nan=False, allow_infinity=False),
        window=st.floats(allow_nan=False, allow_infinity=False, min_value=0),
-       limit=st.integers(min_value=0, max_size=1000))
+       limit=st.integers(min_value=0, max_value=1000))
 def test_limit_ping_return_postcondition_true(timestamps, now, window, limit):
     window_start = now - window
     recent = [t for t in timestamps if t >= window_start]

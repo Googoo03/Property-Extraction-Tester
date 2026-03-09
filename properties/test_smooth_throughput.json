@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "smooth_throughput",
+    "property": "valid_window",
+    "formal": "window > 0"
+  },
+  {
+    "scope": "function",
+    "function": "smooth_throughput",
+    "property": "non_empty_series",
+    "formal": "series"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_throughput",
+    "condition": "window <= 0",
+    "property": "raises_value_error",
+    "formal": "raises ValueError('invalid window')"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_throughput",
+    "condition": "not series",
+    "property": "raises_value_error",
+    "formal": "raises ValueError('no samples')"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_throughput",
+    "condition": "len(tail) < warmup_min",
+    "property": "returns_none",
+    "formal": "output is None"
+  },
+  {
+    "scope": "return",
+    "function": "smooth_throughput",
+    "property": "return_postcondition",
+    "formal": "output is None or isinstance(output, float)"
+  },
+  {
+    "scope": "return",
+    "function": "smooth_throughput",
+    "property": "correct_average",
+    "formal": "output == sum(series[-window:]) / window if output is not None else True"
+  }
+]

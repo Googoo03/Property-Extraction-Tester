@@ -1,0 +1,27 @@
+[
+  {
+    "scope": "function",
+    "function": "lru_evictor",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "lru_evictor",
+    "condition": "capacity < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "lru_evictor",
+    "property": "loop_invariant",
+    "formal": "len(order) decreases by 1 each iteration until len(order) <= capacity"
+  },
+  {
+    "scope": "return",
+    "function": "lru_evictor",
+    "property": "return_postcondition",
+    "formal": "returns list with len(returned) == min(len(input), capacity)"
+  }
+]

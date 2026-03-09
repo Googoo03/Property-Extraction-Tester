@@ -3,7 +3,7 @@ from hypothesis import given, strategies as st
 import pytest
 
 # Assuming the function is in the specified path
-from dataset.python_programs.insert_function_name import combine_requests
+from dataset.python_programs.combine_requests import combine_requests
 
 # Test for the 'preserves_length' property
 @given(left=st.lists(st.integers()), right=st.lists(st.integers()))

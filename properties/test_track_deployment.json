@@ -1,0 +1,52 @@
+[
+  {
+    "scope": "function",
+    "function": "track_deployment",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "track_deployment",
+    "condition": "max_value is not None",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "track_deployment",
+    "condition": "new_value > max_value",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "track_deployment",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return new_value"
+  },
+  {
+    "scope": "precondition",
+    "function": "track_deployment",
+    "property": "key_existence",
+    "formal": "key in counts or counts.get(key, 0) == 0"
+  },
+  {
+    "scope": "postcondition",
+    "function": "track_deployment",
+    "property": "value_increment",
+    "formal": "counts[key] == (counts.get(key, 0) + 1) if max_value is None or (counts.get(key, 0) + 1) <= max_value else max_value"
+  },
+  {
+    "scope": "formal_definition",
+    "function": "track_deployment",
+    "property": "new_value_computation",
+    "formal": "new_value = counts.get(key, 0) + 1"
+  },
+  {
+    "scope": "formal_definition",
+    "function": "track_deployment",
+    "property": "max_value_check",
+    "formal": "new_value = min(new_value, max_value) if max_value is not None and new_value > max_value else new_value"
+  }
+]

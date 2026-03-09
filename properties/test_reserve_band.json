@@ -1,0 +1,52 @@
+[
+  {
+    "scope": "function",
+    "function": "reserve_band",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_band",
+    "condition": "candidate[0] >= candidate[1]",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError if start >= end"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "return",
+    "function": "overlaps",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return not (b[1] <= a[0] or b[0] >= a[1])"
+  },
+  {
+    "scope": "loop",
+    "function": "reserve_band",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_band",
+    "condition": "overlaps(slot, candidate)",
+    "property": "branch_specific_behavior",
+    "formal": "returns (False, list(existing)) if overlap detected"
+  },
+  {
+    "scope": "return",
+    "function": "reserve_band",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return False, list(existing)"
+  },
+  {
+    "scope": "return",
+    "function": "reserve_band",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return True, merged"
+  }
+]

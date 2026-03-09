@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "prices_stream",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "prices_stream",
+    "property": "loop_invariant",
+    "formal": "merged is always sorted and contains all elements processed so far from left and right"
+  },
+  {
+    "scope": "branch",
+    "function": "prices_stream",
+    "condition": "a < b",
+    "property": "branch_specific_behavior",
+    "formal": "output includes a before b, preserving order"
+  },
+  {
+    "scope": "branch",
+    "function": "prices_stream",
+    "condition": "b < a",
+    "property": "branch_specific_behavior",
+    "formal": "output includes b before a, preserving order"
+  },
+  {
+    "scope": "branch",
+    "function": "prices_stream",
+    "condition": "a == b",
+    "property": "branch_specific_behavior",
+    "formal": "output includes both a and b, preserving duplicates"
+  },
+  {
+    "scope": "branch",
+    "function": "prices_stream",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "output removes last element when both lists end with same value"
+  },
+  {
+    "scope": "return",
+    "function": "prices_stream",
+    "property": "return_postcondition",
+    "formal": "return merged is sorted and contains all elements from left and right, except possibly the last duplicate"
+  }
+]

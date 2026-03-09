@@ -1,0 +1,54 @@
+[
+  {
+    "scope": "function",
+    "function": "shares_apportion",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "shares_apportion",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('total must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "shares_apportion",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('minimum must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "shares_apportion",
+    "condition": "not weights",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no weights provided')"
+  },
+  {
+    "scope": "branch",
+    "function": "shares_apportion",
+    "condition": "not any(weights)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('all weights are zero')"
+  },
+  {
+    "scope": "loop",
+    "function": "shares_apportion",
+    "property": "loop_invariant",
+    "formal": "all(x >= minimum for x in allocations)"
+  },
+  {
+    "scope": "loop",
+    "function": "shares_apportion",
+    "property": "loop_invariant",
+    "formal": "sum(allocations) <= total"
+  },
+  {
+    "scope": "return",
+    "function": "shares_apportion",
+    "property": "return_postcondition",
+    "formal": "returns list of integers where each allocation >= minimum and sum(allocations) <= total"
+  }
+]

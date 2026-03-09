@@ -1,0 +1,75 @@
+[
+  {
+    "scope": "function",
+    "function": "smooth_pressure",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "len(recent) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "smooth_pressure",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "smooth_pressure",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return mean"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "window <= 0",
+    "property": "exception_raised",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "not values",
+    "property": "exception_raised",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "function",
+    "function": "smooth_pressure",
+    "property": "correct_mean_calculation",
+    "formal": "mean == sum(values[-window:]) / window"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "len(recent) < warmup_min",
+    "property": "returns_none",
+    "formal": "return is None"
+  },
+  {
+    "scope": "branch",
+    "function": "smooth_pressure",
+    "condition": "len(recent) >= warmup_min",
+    "property": "returns_mean",
+    "formal": "return is not None"
+  }
+]

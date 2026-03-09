@@ -1,0 +1,42 @@
+[
+  {
+    "scope": "function",
+    "function": "track_build",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "track_build",
+    "condition": "cap is not None and counters[key] > cap",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == cap"
+  },
+  {
+    "scope": "branch",
+    "function": "track_build",
+    "condition": "cap is not None and counters[key] >= cap",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == cap"
+  },
+  {
+    "scope": "branch",
+    "function": "track_build",
+    "condition": "cap is not None and counters[key] < cap",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == input[key] + 1"
+  },
+  {
+    "scope": "branch",
+    "function": "track_build",
+    "condition": "cap is None",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == input[key] + 1"
+  },
+  {
+    "scope": "return",
+    "function": "track_build",
+    "property": "return_postcondition",
+    "formal": "return == output[key]"
+  }
+]

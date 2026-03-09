@@ -1,0 +1,59 @@
+[
+  {
+    "scope": "function",
+    "function": "rolling_usage",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_usage",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid window')"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_usage",
+    "condition": "not series",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no samples')"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_usage",
+    "condition": "len(tail) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "returns None"
+  },
+  {
+    "scope": "return",
+    "function": "rolling_usage",
+    "property": "return_postcondition",
+    "formal": "returns None if len(tail) < warmup_min else avg"
+  },
+  {
+    "scope": "function",
+    "function": "rolling_usage",
+    "property": "valid_window",
+    "formal": "window > 0"
+  },
+  {
+    "scope": "function",
+    "function": "rolling_usage",
+    "property": "non_empty_series",
+    "formal": "series is not empty"
+  },
+  {
+    "scope": "function",
+    "function": "rolling_usage",
+    "property": "valid_warmup_min",
+    "formal": "warmup_min >= 0"
+  },
+  {
+    "scope": "function",
+    "function": "rolling_usage",
+    "property": "average_computation",
+    "formal": "avg = sum(tail) / window"
+  }
+]

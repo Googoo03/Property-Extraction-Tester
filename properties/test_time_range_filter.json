@@ -1,0 +1,27 @@
+[
+  {
+    "scope": "function",
+    "function": "time_range_filter",
+    "property": "preserves_length",
+    "formal": "len(output) == len([p for p in points if start <= p[0] < end])"
+  },
+  {
+    "scope": "branch",
+    "function": "time_range_filter",
+    "condition": "start >= end",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError if start >= end"
+  },
+  {
+    "scope": "return",
+    "function": "time_range_filter",
+    "property": "return_postcondition",
+    "formal": "all(p[0] >= start and p[0] < end for p in output) and all(p in points for p in output)"
+  },
+  {
+    "scope": "loop",
+    "function": "time_range_filter",
+    "property": "loop_invariant",
+    "formal": "accumulated result always contains only points satisfying start <= p[0] < end"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "shift_trust",
+    "property": "preserves_length",
+    "formal": "len(output) == len(current)"
+  },
+  {
+    "scope": "branch",
+    "function": "shift_trust",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when shapes mismatch"
+  },
+  {
+    "scope": "branch",
+    "function": "shift_trust",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when allocation is empty"
+  },
+  {
+    "scope": "loop",
+    "function": "shift_trust",
+    "property": "loop_invariant",
+    "formal": "each iteration computes c + (t - c) * damping for corresponding elements"
+  },
+  {
+    "scope": "return",
+    "function": "shift_trust",
+    "property": "return_postcondition",
+    "formal": "returns adjusted vector without renormalization"
+  }
+]

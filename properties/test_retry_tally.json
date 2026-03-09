@@ -1,0 +1,52 @@
+[
+  {
+    "scope": "function",
+    "function": "retry_tally",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "retry_tally",
+    "condition": "cap is not None and counters[key] > cap",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "retry_tally",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return counters[key]"
+  },
+  {
+    "scope": "precondition",
+    "function": "retry_tally",
+    "property": "key_presence",
+    "formal": "key is a valid hashable type for dictionary access"
+  },
+  {
+    "scope": "postcondition",
+    "function": "retry_tally",
+    "property": "counters_modification",
+    "formal": "counters[key] is incremented by 1, but not exceeding cap if cap is not None"
+  },
+  {
+    "scope": "invariant",
+    "function": "retry_tally",
+    "property": "non_negative_count",
+    "formal": "counters[key] >= 0"
+  },
+  {
+    "scope": "branch",
+    "function": "retry_tally",
+    "condition": "cap is None or counters[key] <= cap",
+    "property": "no_clamping",
+    "formal": "counters[key] is incremented without clamping"
+  },
+  {
+    "scope": "function",
+    "function": "retry_tally",
+    "property": "side_effect",
+    "formal": "counters dictionary is modified in place"
+  }
+]

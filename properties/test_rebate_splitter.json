@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "rebate_splitter",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "rebate_splitter",
+    "condition": "len(ratios) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no ratios')"
+  },
+  {
+    "scope": "branch",
+    "function": "rebate_splitter",
+    "condition": "sum(ratios) <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid ratios')"
+  },
+  {
+    "scope": "branch",
+    "function": "rebate_splitter",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative amount')"
+  },
+  {
+    "scope": "loop",
+    "function": "rebate_splitter",
+    "property": "loop_invariant",
+    "formal": "all(r >= 0 for r in ratios) and sum(ratios) > 0 implies base[i] == (ratios[i] / sum(ratios)) * amount for all i"
+  },
+  {
+    "scope": "return",
+    "function": "rebate_splitter",
+    "property": "return_postcondition",
+    "formal": "all(output[i] == (ratios[i] / sum(ratios)) * amount - fee for i in range(len(ratios)))"
+  },
+  {
+    "scope": "loop",
+    "function": "rebate_splitter",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule: base[i] == (ratios[i] / sum(ratios)) * amount for all i"
+  }
+]

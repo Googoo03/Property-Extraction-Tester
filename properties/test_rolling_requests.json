@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "rolling_requests",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_requests",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_requests",
+    "condition": "not series",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_requests",
+    "condition": "len(tail) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "rolling_requests",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "rolling_requests",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return avg"
+  }
+]
