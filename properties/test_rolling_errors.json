@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "rolling_errors",
+    "property": "preserves_length",
+    "formal": "len(values) == len(values)"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_errors",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_errors",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "rolling_errors",
+    "condition": "len(recent) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "returns None"
+  },
+  {
+    "scope": "return",
+    "function": "rolling_errors",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "rolling_errors",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return mean"
+  }
+]

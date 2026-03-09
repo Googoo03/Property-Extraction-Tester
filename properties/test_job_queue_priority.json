@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "job_queue_priority",
+    "property": "preserves_length",
+    "formal": "len(jobs) == len(jobs)"
+  },
+  {
+    "scope": "branch",
+    "function": "job_queue_priority",
+    "condition": "max_jobs < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('max_jobs must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "job_queue_priority",
+    "condition": "len(jobs) > max_jobs",
+    "property": "branch_specific_behavior",
+    "formal": "returns False"
+  },
+  {
+    "scope": "return",
+    "function": "job_queue_priority",
+    "property": "return_postcondition",
+    "formal": "returns False when len(jobs) > max_jobs"
+  },
+  {
+    "scope": "return",
+    "function": "job_queue_priority",
+    "property": "return_postcondition",
+    "formal": "returns True when len(jobs) <= max_jobs"
+  }
+]

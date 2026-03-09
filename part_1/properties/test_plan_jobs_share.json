@@ -1,0 +1,67 @@
+[
+  {
+    "scope": "function",
+    "function": "plan_jobs_share",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_jobs_share",
+    "condition": "len(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('weights required')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_jobs_share",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative total')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_jobs_share",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative minimum')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_jobs_share",
+    "condition": "sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('zero total weight')"
+  },
+  {
+    "scope": "loop",
+    "function": "plan_jobs_share",
+    "property": "loop_invariant",
+    "formal": "all(0 <= v <= total for v in shares)"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_jobs_share",
+    "condition": "floor_to_int",
+    "property": "branch_specific_behavior",
+    "formal": "all(isinstance(v, int) for v in output)"
+  },
+  {
+    "scope": "return",
+    "function": "plan_jobs_share",
+    "property": "return_postcondition",
+    "formal": "sum(output) <= total"
+  },
+  {
+    "scope": "loop",
+    "function": "plan_jobs_share",
+    "property": "loop_invariant",
+    "formal": "all(v >= minimum for v in shares)"
+  },
+  {
+    "scope": "return",
+    "function": "plan_jobs_share",
+    "property": "return_postcondition",
+    "formal": "all(v >= minimum for v in output) and all(isinstance(v, float) for v in output)"
+  }
+]

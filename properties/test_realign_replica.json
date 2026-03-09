@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "realign_replica",
+    "property": "preserves_length",
+    "formal": "len(output) == len(current)"
+  },
+  {
+    "scope": "branch",
+    "function": "realign_replica",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "realign_replica",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "realign_replica",
+    "property": "loop_invariant",
+    "formal": "for all i, adjusted[i] == current[i] + (target[i] - current[i]) * damping"
+  },
+  {
+    "scope": "return",
+    "function": "realign_replica",
+    "property": "return_postcondition",
+    "formal": "isinstance(output, list) and all(isinstance(x, float) for x in output)"
+  }
+]

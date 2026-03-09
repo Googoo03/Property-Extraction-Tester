@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "limit_query",
+    "property": "preserves_length",
+    "formal": "len(timestamps) == len([t for t in timestamps if t >= now - window]) or len([t for t in timestamps if t >= now - window]) <= len(timestamps)"
+  },
+  {
+    "scope": "loop",
+    "function": "limit_query",
+    "property": "loop_invariant",
+    "formal": "all(t >= now - window for t in active)"
+  },
+  {
+    "scope": "branch",
+    "function": "limit_query",
+    "condition": "len(active) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0) if len(active) > limit else output == (True, limit - len(active))"
+  },
+  {
+    "scope": "return",
+    "function": "limit_query",
+    "property": "return_postcondition",
+    "formal": "output == (False, 0) if len(active) > limit else output == (True, limit - len(active))"
+  },
+  {
+    "scope": "return",
+    "function": "limit_query",
+    "property": "return_postcondition",
+    "formal": "output[0] == (len(active) <= limit)"
+  }
+]

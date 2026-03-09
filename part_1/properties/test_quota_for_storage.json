@@ -1,0 +1,54 @@
+[
+  {
+    "scope": "function",
+    "function": "quota_for_storage",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_storage",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('total must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_storage",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('minimum must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_storage",
+    "condition": "not weights",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no weights provided')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_storage",
+    "condition": "not any(weights)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('all weights are zero')"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_storage",
+    "property": "loop_invariant",
+    "formal": "each iteration computes planned[i] = max(minimum, (weights[i] / total_weight) * total)"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_storage",
+    "property": "loop_invariant",
+    "formal": "allocations[i] = int(planned[i]) for each i"
+  },
+  {
+    "scope": "return",
+    "function": "quota_for_storage",
+    "property": "return_postcondition",
+    "formal": "returns list of integers where len(return) == len(weights) and each element is int(max(minimum, (weights[i] / total_weight) * total))"
+  }
+]

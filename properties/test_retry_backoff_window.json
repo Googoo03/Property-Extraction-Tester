@@ -1,0 +1,28 @@
+[
+  {
+    "scope": "function",
+    "function": "retry_backoff_window",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "retry_backoff_window",
+    "condition": "attempts < 0",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "retry_backoff_window",
+    "condition": "delay > max_delay",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "retry_backoff_window",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return delay"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "percentile_estimator",
+    "property": "preserves_length",
+    "formal": "len(output) == 1"
+  },
+  {
+    "scope": "branch",
+    "function": "percentile_estimator",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no values')"
+  },
+  {
+    "scope": "branch",
+    "function": "percentile_estimator",
+    "condition": "not (0 <= q <= 1)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('q must be in [0, 1]')"
+  },
+  {
+    "scope": "return",
+    "function": "percentile_estimator",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return values[idx] where idx = int(len(values) * q)"
+  },
+  {
+    "scope": "return",
+    "function": "percentile_estimator",
+    "property": "index_within_bounds",
+    "formal": "0 <= int(len(values) * q) < len(values)"
+  },
+  {
+    "scope": "function",
+    "function": "percentile_estimator",
+    "property": "valid_output_type",
+    "formal": "isinstance(output, type(values[0]))"
+  },
+  {
+    "scope": "branch",
+    "function": "percentile_estimator",
+    "condition": "q == 1.0",
+    "property": "edge_case_behavior",
+    "formal": "raises IndexError or returns values[-1] depending on implementation"
+  }
+]

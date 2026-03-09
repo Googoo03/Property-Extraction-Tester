@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "token_expiry_check",
+    "property": "preserves_length",
+    "formal": "len(tokens) == len(tokens)"
+  },
+  {
+    "scope": "branch",
+    "function": "token_expiry_check",
+    "condition": "record is None",
+    "property": "branch_specific_behavior",
+    "formal": "output is None"
+  },
+  {
+    "scope": "return",
+    "function": "token_expiry_check",
+    "property": "return_postcondition",
+    "formal": "output is None"
+  },
+  {
+    "scope": "branch",
+    "function": "token_expiry_check",
+    "condition": "now > expires_at",
+    "property": "branch_specific_behavior",
+    "formal": "output is None"
+  },
+  {
+    "scope": "return",
+    "function": "token_expiry_check",
+    "property": "return_postcondition",
+    "formal": "output is None"
+  },
+  {
+    "scope": "return",
+    "function": "token_expiry_check",
+    "property": "return_postcondition",
+    "formal": "output == value"
+  }
+]

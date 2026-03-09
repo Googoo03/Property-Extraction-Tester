@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "priority_mix",
+    "property": "preserves_length",
+    "formal": "len(output) == len(current)"
+  },
+  {
+    "scope": "branch",
+    "function": "priority_mix",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('shape mismatch')"
+  },
+  {
+    "scope": "branch",
+    "function": "priority_mix",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('empty allocation')"
+  },
+  {
+    "scope": "loop",
+    "function": "priority_mix",
+    "property": "loop_invariant",
+    "formal": "updated[idx] == current[idx] + (target[idx] - current[idx]) * damping for all idx in range(len(current))"
+  },
+  {
+    "scope": "return",
+    "function": "priority_mix",
+    "property": "return_postcondition",
+    "formal": "isinstance(output, list) and len(output) == len(current) and all(isinstance(x, float) or isinstance(x, int) for x in output)"
+  }
+]

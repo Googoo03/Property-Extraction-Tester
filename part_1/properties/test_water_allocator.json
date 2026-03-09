@@ -1,0 +1,67 @@
+[
+  {
+    "scope": "function",
+    "function": "water_allocator",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "water_allocator",
+    "condition": "len(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"weights required\")"
+  },
+  {
+    "scope": "branch",
+    "function": "water_allocator",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"negative total\")"
+  },
+  {
+    "scope": "branch",
+    "function": "water_allocator",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"negative minimum\")"
+  },
+  {
+    "scope": "branch",
+    "function": "water_allocator",
+    "condition": "sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"zero total weight\")"
+  },
+  {
+    "scope": "loop",
+    "function": "water_allocator",
+    "property": "loop_invariant",
+    "formal": "all(v >= minimum for v in shares)"
+  },
+  {
+    "scope": "branch",
+    "function": "water_allocator",
+    "condition": "floor_to_int",
+    "property": "branch_specific_behavior",
+    "formal": "all(isinstance(v, int) for v in output)"
+  },
+  {
+    "scope": "return",
+    "function": "water_allocator",
+    "property": "return_postcondition",
+    "formal": "all(isinstance(v, int) for v in output) if floor_to_int else all(isinstance(v, float) for v in output)"
+  },
+  {
+    "scope": "loop",
+    "function": "water_allocator",
+    "property": "loop_invariant",
+    "formal": "sum(shares) <= total + len(weights) * minimum"
+  },
+  {
+    "scope": "return",
+    "function": "water_allocator",
+    "property": "return_postcondition",
+    "formal": "all(v >= minimum for v in output)"
+  }
+]

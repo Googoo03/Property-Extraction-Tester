@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "normalize",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "normalize",
+    "condition": "len(xs) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "output == []"
+  },
+  {
+    "scope": "return",
+    "function": "normalize",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return xs if len(xs) == 0 else [x / sum(xs) for x in xs]"
+  },
+  {
+    "scope": "return",
+    "function": "normalize",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return [x / s for x in xs] if len(xs) > 0 else []"
+  },
+  {
+    "scope": "loop",
+    "function": "normalize",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule: [x / s for x in xs] where s = sum(xs)"
+  }
+]

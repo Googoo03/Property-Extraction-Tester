@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "log_sampling_decider",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "log_sampling_decider",
+    "condition": "not (0 <= rate <= 1)",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "log_sampling_decider",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return bucket > rate"
+  },
+  {
+    "scope": "precondition",
+    "function": "log_sampling_decider",
+    "property": "rate_validation",
+    "formal": "0 <= rate <= 1"
+  },
+  {
+    "scope": "precondition",
+    "function": "log_sampling_decider",
+    "property": "log_id_type",
+    "formal": "isinstance(log_id, (int, str))"
+  },
+  {
+    "scope": "branch",
+    "function": "log_sampling_decider",
+    "condition": "0 <= rate <= 1",
+    "property": "rate_within_bounds",
+    "formal": "rate is valid and function proceeds"
+  },
+  {
+    "scope": "branch",
+    "function": "log_sampling_decider",
+    "condition": "bucket > rate",
+    "property": "sampling_decision",
+    "formal": "return value is True if bucket exceeds rate, else False"
+  }
+]

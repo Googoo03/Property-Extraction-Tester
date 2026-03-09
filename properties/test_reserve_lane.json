@@ -1,0 +1,89 @@
+[
+  {
+    "scope": "function",
+    "function": "reserve_lane",
+    "property": "input_validation",
+    "formal": "candidate[0] < candidate[1]"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_lane",
+    "property": "preserves_existing",
+    "formal": "output[1] == existing or output[1] == merged"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_lane",
+    "condition": "candidate[0] >= candidate[1]",
+    "property": "raises_error",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_lane",
+    "condition": "overlaps(slot, candidate)",
+    "property": "returns_existing",
+    "formal": "output == (False, list(existing))"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_lane",
+    "condition": "not overlaps(slot, candidate)",
+    "property": "continues_loop",
+    "formal": "loop continues"
+  },
+  {
+    "scope": "return",
+    "function": "reserve_lane",
+    "property": "return_success",
+    "formal": "output == (True, merged)"
+  },
+  {
+    "scope": "return",
+    "function": "reserve_lane",
+    "property": "return_failure",
+    "formal": "output == (False, list(existing))"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "boundary_touch",
+    "formal": "overlaps((1,2), (2,3)) == True"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "no_overlap",
+    "formal": "overlaps((1,2), (3,4)) == False"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "full_overlap",
+    "formal": "overlaps((1,4), (2,3)) == True"
+  },
+  {
+    "scope": "loop",
+    "function": "reserve_lane",
+    "property": "iterates_all",
+    "formal": "iterates over all elements in existing"
+  },
+  {
+    "scope": "loop",
+    "function": "reserve_lane",
+    "property": "no_side_effects",
+    "formal": "existing is not modified"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_lane",
+    "property": "output_type",
+    "formal": "isinstance(output, tuple) and len(output) == 2"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_lane",
+    "property": "merged_sorted",
+    "formal": "output[1] == sorted(output[1])"
+  }
+]

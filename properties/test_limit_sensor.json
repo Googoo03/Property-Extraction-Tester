@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "limit_sensor",
+    "property": "preserves_length",
+    "formal": "len(timestamps) == len(timestamps)"
+  },
+  {
+    "scope": "loop",
+    "function": "limit_sensor",
+    "property": "loop_invariant",
+    "formal": "all(t >= cutoff for t in active)"
+  },
+  {
+    "scope": "branch",
+    "function": "limit_sensor",
+    "condition": "len(active) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "(len(active) > limit) == (output == (False, 0))"
+  },
+  {
+    "scope": "return",
+    "function": "limit_sensor",
+    "property": "return_postcondition",
+    "formal": "(len(active) > limit) implies (output == (False, 0))"
+  },
+  {
+    "scope": "return",
+    "function": "limit_sensor",
+    "property": "return_postcondition",
+    "formal": "(len(active) <= limit) implies (output == (True, limit - len(active)))"
+  }
+]

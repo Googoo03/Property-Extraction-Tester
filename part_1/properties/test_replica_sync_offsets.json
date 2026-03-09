@@ -1,0 +1,65 @@
+[
+  {
+    "scope": "function",
+    "function": "replica_sync_offsets",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "loop",
+    "function": "replica_sync_offsets",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "branch",
+    "function": "replica_sync_offsets",
+    "condition": "primary[i] < replica[j]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "replica_sync_offsets",
+    "condition": "missing and replica and missing[-1] == replica[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "replica_sync_offsets",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return missing"
+  },
+  {
+    "scope": "function",
+    "function": "replica_sync_offsets",
+    "property": "output_type",
+    "formal": "isinstance(output, list)"
+  },
+  {
+    "scope": "function",
+    "function": "replica_sync_offsets",
+    "property": "output_sorted",
+    "formal": "output == sorted(output)"
+  },
+  {
+    "scope": "function",
+    "function": "replica_sync_offsets",
+    "property": "output_subset",
+    "formal": "set(output).issubset(set(primary))"
+  },
+  {
+    "scope": "function",
+    "function": "replica_sync_offsets",
+    "property": "output_disjoint",
+    "formal": "not set(output).intersection(set(replica))"
+  },
+  {
+    "scope": "branch",
+    "function": "replica_sync_offsets",
+    "condition": "missing and replica and missing[-1] == replica[-1]",
+    "property": "pop_effect",
+    "formal": "if missing and replica and missing[-1] == replica[-1]: len(missing) == len(missing) - 1"
+  }
+]

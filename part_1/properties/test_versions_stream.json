@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "versions_stream",
+    "property": "preserves_length",
+    "formal": "len(versions_stream(left, right)) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "versions_stream",
+    "property": "loop_invariant",
+    "formal": "merged is always sorted and contains all elements from left[:i] and right[:j]"
+  },
+  {
+    "scope": "branch",
+    "function": "versions_stream",
+    "condition": "a < b",
+    "property": "branch_specific_behavior",
+    "formal": "output includes a and excludes b until next iteration"
+  },
+  {
+    "scope": "branch",
+    "function": "versions_stream",
+    "condition": "b < a",
+    "property": "branch_specific_behavior",
+    "formal": "output includes b and excludes a until next iteration"
+  },
+  {
+    "scope": "branch",
+    "function": "versions_stream",
+    "condition": "a == b",
+    "property": "branch_specific_behavior",
+    "formal": "output includes both a and b"
+  },
+  {
+    "scope": "branch",
+    "function": "versions_stream",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "output excludes the last element if it is the same in both left and right"
+  },
+  {
+    "scope": "return",
+    "function": "versions_stream",
+    "property": "return_postcondition",
+    "formal": "returns a sorted list containing all elements from left and right, except possibly the last if it is the same in both"
+  }
+]

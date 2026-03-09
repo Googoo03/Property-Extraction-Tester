@@ -1,0 +1,28 @@
+[
+  {
+    "scope": "function",
+    "function": "track_delivery",
+    "property": "preserves_length",
+    "formal": "len(counters) == len(counters)"
+  },
+  {
+    "scope": "branch",
+    "function": "track_delivery",
+    "condition": "cap is not None",
+    "property": "branch_specific_behavior",
+    "formal": "output == min(current + 1, cap)"
+  },
+  {
+    "scope": "branch",
+    "function": "track_delivery",
+    "condition": "updated > cap",
+    "property": "branch_specific_behavior",
+    "formal": "updated == cap"
+  },
+  {
+    "scope": "return",
+    "function": "track_delivery",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return updated"
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "weights_union",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "weights_union",
+    "property": "loop_invariant",
+    "formal": "merged is always sorted and contains all elements from left[:i] and right[:j]"
+  },
+  {
+    "scope": "branch",
+    "function": "weights_union",
+    "condition": "a < b",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition: merged.append(a) and i += 1"
+  },
+  {
+    "scope": "branch",
+    "function": "weights_union",
+    "condition": "b < a",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition: merged.append(b) and j += 1"
+  },
+  {
+    "scope": "branch",
+    "function": "weights_union",
+    "condition": "a == b",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition: merged.append(a) and merged.append(b) and i += 1 and j += 1"
+  },
+  {
+    "scope": "branch",
+    "function": "weights_union",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition: merged.pop()"
+  },
+  {
+    "scope": "return",
+    "function": "weights_union",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return merged"
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "scope": "function",
+    "function": "quota_allocator_service",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_allocator_service",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('total must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_allocator_service",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('minimum must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_allocator_service",
+    "condition": "not weights or sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid weights')"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_allocator_service",
+    "property": "loop_invariant",
+    "formal": "all(x >= minimum for x in raw) and all(isinstance(x, float) for x in raw)"
+  },
+  {
+    "scope": "return",
+    "function": "quota_allocator_service",
+    "property": "return_postcondition",
+    "formal": "all(isinstance(x, int) for x in output) and all(x >= minimum for x in output)"
+  },
+  {
+    "scope": "function",
+    "function": "quota_allocator_service",
+    "property": "total_equality",
+    "formal": "sum(output) == total or sum(output) == total - (total % weight_sum)"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_allocator_service",
+    "property": "loop_invariant",
+    "formal": "sum(raw) == total and all(x >= minimum for x in raw)"
+  }
+]

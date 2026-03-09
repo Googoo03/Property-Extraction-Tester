@@ -1,0 +1,67 @@
+[
+  {
+    "scope": "function",
+    "function": "votes_apportion",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "votes_apportion",
+    "condition": "len(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"weights required\")"
+  },
+  {
+    "scope": "branch",
+    "function": "votes_apportion",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"negative total\")"
+  },
+  {
+    "scope": "branch",
+    "function": "votes_apportion",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"negative minimum\")"
+  },
+  {
+    "scope": "branch",
+    "function": "votes_apportion",
+    "condition": "sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"zero total weight\")"
+  },
+  {
+    "scope": "loop",
+    "function": "votes_apportion",
+    "property": "loop_invariant",
+    "formal": "for each w in weights: shares[i] = max((w / weight_sum) * total, minimum)"
+  },
+  {
+    "scope": "branch",
+    "function": "votes_apportion",
+    "condition": "floor_to_int",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "votes_apportion",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return [int(v) for v in shares] if floor_to_int else shares"
+  },
+  {
+    "scope": "loop",
+    "function": "votes_apportion",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule: each share is at least minimum"
+  },
+  {
+    "scope": "return",
+    "function": "votes_apportion",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return shares"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "room_reservation",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input) or len(output) == len(input) + 1"
+  },
+  {
+    "scope": "branch",
+    "function": "room_reservation",
+    "condition": "start >= end",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid interval')"
+  },
+  {
+    "scope": "loop",
+    "function": "room_reservation",
+    "property": "loop_invariant",
+    "formal": "all(not (end <= s or start >= e) for s, e in existing[:i]) implies return False, existing"
+  },
+  {
+    "scope": "branch",
+    "function": "room_reservation",
+    "condition": "not (end <= s or start >= e)",
+    "property": "branch_specific_behavior",
+    "formal": "returns (False, existing)"
+  },
+  {
+    "scope": "return",
+    "function": "room_reservation",
+    "property": "return_postcondition",
+    "formal": "returns (False, existing) if overlap exists"
+  },
+  {
+    "scope": "return",
+    "function": "room_reservation",
+    "property": "return_postcondition",
+    "formal": "returns (True, updated) where updated is sorted(existing + [interval]) if no overlap"
+  }
+]

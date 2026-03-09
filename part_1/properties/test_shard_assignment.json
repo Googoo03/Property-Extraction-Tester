@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "shard_assignment",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "shard_assignment",
+    "condition": "shards <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "shard_assignment",
+    "property": "loop_invariant",
+    "formal": "sum(len(b) for b in buckets) == len(keys)"
+  },
+  {
+    "scope": "loop",
+    "function": "shard_assignment",
+    "property": "loop_invariant",
+    "formal": "all(key in keys for bucket in buckets for key in bucket)"
+  },
+  {
+    "scope": "return",
+    "function": "shard_assignment",
+    "property": "return_postcondition",
+    "formal": "len(output) == shards and all(isinstance(bucket, list) for bucket in output)"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "scope": "function",
+    "function": "rating_curve",
+    "property": "preserves_length",
+    "formal": "len([x0, y0, x1, y1, x, clamp]) == 5"
+  },
+  {
+    "scope": "branch",
+    "function": "rating_curve",
+    "condition": "x1 == x0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when x1 == x0"
+  },
+  {
+    "scope": "branch",
+    "function": "rating_curve",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "output clamped to [min(y0, y1), max(y0, y1)] when clamp=True"
+  },
+  {
+    "scope": "return",
+    "function": "rating_curve",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return y"
+  }
+]

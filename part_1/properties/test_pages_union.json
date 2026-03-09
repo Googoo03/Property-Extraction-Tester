@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "pages_union",
+    "property": "preserves_length",
+    "formal": "len(pages_union(left, right)) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "pages_union",
+    "property": "loop_invariant",
+    "formal": "all(merged[i] <= merged[i+1] for i in range(len(merged)-1))"
+  },
+  {
+    "scope": "branch",
+    "function": "pages_union",
+    "condition": "a < b",
+    "property": "branch_specific_behavior",
+    "formal": "pages_union([a], [b]) == [a, b] if a < b else [b, a]"
+  },
+  {
+    "scope": "branch",
+    "function": "pages_union",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "pages_union([x], [x]) == [] if x == x else [x, x]"
+  },
+  {
+    "scope": "return",
+    "function": "pages_union",
+    "property": "return_postcondition",
+    "formal": "all(x in left or x in right for x in pages_union(left, right))"
+  }
+]

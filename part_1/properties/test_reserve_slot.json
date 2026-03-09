@@ -1,0 +1,88 @@
+[
+  {
+    "scope": "function",
+    "function": "reserve_slot",
+    "property": "input_validation",
+    "formal": "candidate[0] < candidate[1]"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_slot",
+    "property": "output_format",
+    "formal": "isinstance(output, tuple) and len(output) == 2 and isinstance(output[0], bool) and isinstance(output[1], list)"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_slot",
+    "property": "output_slots_valid",
+    "formal": "all(slot[0] < slot[1] for slot in output[1])"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_slot",
+    "condition": "candidate[0] >= candidate[1]",
+    "property": "raises_exception",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "reserve_slot",
+    "condition": "overlaps(slot, candidate)",
+    "property": "returns_false",
+    "formal": "output == (False, list(existing))"
+  },
+  {
+    "scope": "return",
+    "function": "reserve_slot",
+    "property": "return_non_overlapping",
+    "formal": "output[0] == True and all(not overlaps(slot, candidate) for slot in existing)"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "boundary_touch",
+    "formal": "overlaps((1,2), (2,3)) == True"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "proper_overlap",
+    "formal": "overlaps((1,3), (2,4)) == True"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "no_overlap",
+    "formal": "overlaps((1,2), (3,4)) == False"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "swapped_args",
+    "formal": "overlaps((2,4), (1,3)) == True"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "identical_slots",
+    "formal": "overlaps((1,3), (1,3)) == True"
+  },
+  {
+    "scope": "loop",
+    "function": "reserve_slot",
+    "property": "no_side_effects",
+    "formal": "existing == original_existing"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_slot",
+    "property": "preserves_existing",
+    "formal": "all(slot in output[1] for slot in existing)"
+  },
+  {
+    "scope": "function",
+    "function": "reserve_slot",
+    "property": "adds_candidate_if_valid",
+    "formal": "output[0] == True implies candidate in output[1]"
+  }
+]

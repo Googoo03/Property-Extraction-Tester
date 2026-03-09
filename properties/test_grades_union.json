@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "grades_union",
+    "property": "preserves_length",
+    "formal": "len(grades_union(input[0], input[1])) == len(input[0]) + len(input[1])"
+  },
+  {
+    "scope": "loop",
+    "function": "grades_union",
+    "property": "loop_invariant",
+    "formal": "all(merged[k] <= min(left[i] if i < len(left) else float('inf'), right[j] if j < len(right) else float('inf')) for k in range(len(merged)))"
+  },
+  {
+    "scope": "branch",
+    "function": "grades_union",
+    "condition": "a < b",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == a if merged else True"
+  },
+  {
+    "scope": "branch",
+    "function": "grades_union",
+    "condition": "b < a",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == b if merged else True"
+  },
+  {
+    "scope": "branch",
+    "function": "grades_union",
+    "condition": "a == b",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == a and merged[-2] == a if len(merged) >= 2 else True"
+  },
+  {
+    "scope": "branch",
+    "function": "grades_union",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "len(merged) == len(left) + len(right) - 1"
+  },
+  {
+    "scope": "return",
+    "function": "grades_union",
+    "property": "return_postcondition",
+    "formal": "all(merged[k] <= merged[k+1] for k in range(len(merged)-1))"
+  }
+]

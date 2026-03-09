@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "latency_rolling_avg",
+    "property": "preserves_length",
+    "formal": "len(series) == len(series)"
+  },
+  {
+    "scope": "branch",
+    "function": "latency_rolling_avg",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid window')"
+  },
+  {
+    "scope": "branch",
+    "function": "latency_rolling_avg",
+    "condition": "not series",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no samples')"
+  },
+  {
+    "scope": "branch",
+    "function": "latency_rolling_avg",
+    "condition": "len(tail) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "return None"
+  },
+  {
+    "scope": "return",
+    "function": "latency_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "return None"
+  },
+  {
+    "scope": "return",
+    "function": "latency_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "isinstance(avg, float) and avg == sum(series[-window:]) / window"
+  }
+]

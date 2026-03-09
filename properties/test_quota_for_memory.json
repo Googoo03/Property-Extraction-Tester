@@ -1,0 +1,54 @@
+[
+  {
+    "scope": "function",
+    "function": "quota_for_memory",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_memory",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_memory",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_memory",
+    "condition": "not weights",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_memory",
+    "condition": "not any(weights)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_memory",
+    "property": "loop_invariant",
+    "formal": "all(allocations[i] >= minimum for i in range(len(weights)))"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_memory",
+    "property": "loop_invariant",
+    "formal": "sum(allocations) <= total"
+  },
+  {
+    "scope": "return",
+    "function": "quota_for_memory",
+    "property": "return_postcondition",
+    "formal": "all(isinstance(x, int) for x in allocations) and all(x >= minimum for x in allocations)"
+  }
+]

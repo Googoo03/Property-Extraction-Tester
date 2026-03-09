@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "plan_points_share",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_points_share",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('total < 0')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_points_share",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('minimum < 0')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_points_share",
+    "condition": "not weights or sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid weights')"
+  },
+  {
+    "scope": "function",
+    "function": "compute_share",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "return",
+    "function": "compute_share",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return raw if raw >= minimum else minimum"
+  },
+  {
+    "scope": "return",
+    "function": "plan_points_share",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return list(map(int, shares))"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "rent_splitter",
+    "property": "preserves_length",
+    "formal": "len(output) == len(ratios)"
+  },
+  {
+    "scope": "branch",
+    "function": "rent_splitter",
+    "condition": "len(ratios) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no ratios')"
+  },
+  {
+    "scope": "branch",
+    "function": "rent_splitter",
+    "condition": "sum(ratios) <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid ratios')"
+  },
+  {
+    "scope": "branch",
+    "function": "rent_splitter",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative amount')"
+  },
+  {
+    "scope": "loop",
+    "function": "rent_splitter",
+    "property": "loop_invariant",
+    "formal": "each share is computed as (r / total_ratio) * amount"
+  },
+  {
+    "scope": "return",
+    "function": "rent_splitter",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return [share - fee for share in base]"
+  },
+  {
+    "scope": "loop",
+    "function": "rent_splitter",
+    "property": "loop_invariant",
+    "formal": "sum of base shares equals amount before fee is applied"
+  }
+]

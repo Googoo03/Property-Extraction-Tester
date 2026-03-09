@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "metric_rolling_avg",
+    "property": "preserves_length",
+    "formal": "len(values) == len(values)"
+  },
+  {
+    "scope": "branch",
+    "function": "metric_rolling_avg",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('window must be positive')"
+  },
+  {
+    "scope": "branch",
+    "function": "metric_rolling_avg",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no values')"
+  },
+  {
+    "scope": "branch",
+    "function": "metric_rolling_avg",
+    "condition": "len(tail) < min_samples",
+    "property": "branch_specific_behavior",
+    "formal": "return None"
+  },
+  {
+    "scope": "return",
+    "function": "metric_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "metric_rolling_avg",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return avg"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "scope": "function",
+    "function": "scores_apportion",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "scores_apportion",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"total < 0\")"
+  },
+  {
+    "scope": "branch",
+    "function": "scores_apportion",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"minimum < 0\")"
+  },
+  {
+    "scope": "branch",
+    "function": "scores_apportion",
+    "condition": "not weights or sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError(\"invalid weights\")"
+  },
+  {
+    "scope": "function",
+    "function": "compute_share",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "return",
+    "function": "compute_share",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return raw if raw >= minimum else minimum"
+  },
+  {
+    "scope": "return",
+    "function": "scores_apportion",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return list(map(int, shares))"
+  },
+  {
+    "scope": "function",
+    "function": "scores_apportion",
+    "property": "sum_conservation",
+    "formal": "sum(output) <= total"
+  },
+  {
+    "scope": "function",
+    "function": "scores_apportion",
+    "property": "minimum_bound",
+    "formal": "all(x >= minimum for x in output)"
+  },
+  {
+    "scope": "function",
+    "function": "scores_apportion",
+    "property": "weights_proportionality",
+    "formal": "abs(sum((w / sum(weights)) * total for w in weights) - sum(output)) <= total * 1e-6"
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "fee_splitter",
+    "property": "preserves_length",
+    "formal": "len(output) == len(ratios)"
+  },
+  {
+    "scope": "branch",
+    "function": "fee_splitter",
+    "condition": "not ratios",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('empty ratios')"
+  },
+  {
+    "scope": "branch",
+    "function": "fee_splitter",
+    "condition": "sum(ratios) <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid ratios')"
+  },
+  {
+    "scope": "branch",
+    "function": "fee_splitter",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative amount')"
+  },
+  {
+    "scope": "return",
+    "function": "fee_splitter",
+    "property": "return_postcondition",
+    "formal": "all(b >= 0 for b in output) if amount >= 0 and fee == 0 else True"
+  },
+  {
+    "scope": "loop",
+    "function": "fee_splitter",
+    "property": "loop_invariant",
+    "formal": "sum(base) == amount before fee application"
+  }
+]

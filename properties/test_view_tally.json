@@ -1,0 +1,28 @@
+[
+  {
+    "scope": "function",
+    "function": "view_tally",
+    "property": "preserves_length",
+    "formal": "len(counts) == len(input_counts)"
+  },
+  {
+    "scope": "branch",
+    "function": "view_tally",
+    "condition": "max_value is not None",
+    "property": "branch_specific_behavior",
+    "formal": "output_behavior_depends_on_condition"
+  },
+  {
+    "scope": "branch",
+    "function": "view_tally",
+    "condition": "new_value > max_value",
+    "property": "branch_specific_behavior",
+    "formal": "output_behavior_depends_on_condition"
+  },
+  {
+    "scope": "return",
+    "function": "view_tally",
+    "property": "return_postcondition",
+    "formal": "returns_value_satisfying_expected_semantics: return new_value"
+  }
+]

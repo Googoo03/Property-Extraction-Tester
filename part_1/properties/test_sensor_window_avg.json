@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "sensor_window_avg",
+    "property": "validates_input",
+    "formal": "window > 0 and samples"
+  },
+  {
+    "scope": "branch",
+    "function": "sensor_window_avg",
+    "condition": "window <= 0",
+    "property": "raises_error",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "sensor_window_avg",
+    "condition": "not samples",
+    "property": "raises_error",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "sensor_window_avg",
+    "condition": "len(recent) < min_samples",
+    "property": "returns_none",
+    "formal": "return None"
+  },
+  {
+    "scope": "return",
+    "function": "sensor_window_avg",
+    "property": "returns_mean",
+    "formal": "isinstance(return_value, float)"
+  },
+  {
+    "scope": "return",
+    "function": "sensor_window_avg",
+    "property": "returns_mean",
+    "formal": "return_value == sum(samples[-window:]) / window"
+  }
+]

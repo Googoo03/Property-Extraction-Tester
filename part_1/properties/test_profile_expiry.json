@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "profile_expiry",
+    "property": "preserves_length",
+    "formal": "len(entries) == len(entries)"
+  },
+  {
+    "scope": "branch",
+    "function": "profile_expiry",
+    "condition": "key not in entries",
+    "property": "branch_specific_behavior",
+    "formal": "output is None if key not in entries"
+  },
+  {
+    "scope": "branch",
+    "function": "profile_expiry",
+    "condition": "now > expires_at",
+    "property": "branch_specific_behavior",
+    "formal": "output is None if now > expires_at"
+  },
+  {
+    "scope": "return",
+    "function": "profile_expiry",
+    "property": "return_postcondition",
+    "formal": "returns None if key not in entries or now > expires_at"
+  },
+  {
+    "scope": "return",
+    "function": "profile_expiry",
+    "property": "return_postcondition",
+    "formal": "returns value if key in entries and now <= expires_at"
+  }
+]

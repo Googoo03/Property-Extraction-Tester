@@ -1,0 +1,59 @@
+[
+  {
+    "scope": "function",
+    "function": "timestamps_stream",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "timestamps_stream",
+    "property": "loop_invariant",
+    "formal": "all(merged[k] <= merged[k+1] for k in range(len(merged)-1))"
+  },
+  {
+    "scope": "branch",
+    "function": "timestamps_stream",
+    "condition": "left[i] <= right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "timestamps_stream",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "timestamps_stream",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return merged"
+  },
+  {
+    "scope": "function",
+    "function": "timestamps_stream",
+    "property": "preserves_order",
+    "formal": "all(merged[k] <= merged[k+1] for k in range(len(merged)-1))"
+  },
+  {
+    "scope": "function",
+    "function": "timestamps_stream",
+    "property": "contains_all_elements",
+    "formal": "set(merged) == set(left) | set(right)"
+  },
+  {
+    "scope": "function",
+    "function": "timestamps_stream",
+    "property": "handles_empty_inputs",
+    "formal": "(not left and not right) or (not left and output == right) or (not right and output == left)"
+  },
+  {
+    "scope": "branch",
+    "function": "timestamps_stream",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "bug_scenario",
+    "formal": "len(merged) == len(left) + len(right) - 1"
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "ttl_snapshot_store",
+    "property": "preserves_length",
+    "formal": "len(entries) == len(entries)"
+  },
+  {
+    "scope": "branch",
+    "function": "ttl_snapshot_store",
+    "condition": "key not in entries",
+    "property": "branch_specific_behavior",
+    "formal": "output == None"
+  },
+  {
+    "scope": "branch",
+    "function": "ttl_snapshot_store",
+    "condition": "now > expires_at",
+    "property": "branch_specific_behavior",
+    "formal": "output == None"
+  },
+  {
+    "scope": "branch",
+    "function": "ttl_snapshot_store",
+    "condition": "now <= expires_at",
+    "property": "branch_specific_behavior",
+    "formal": "output == value"
+  },
+  {
+    "scope": "return",
+    "function": "ttl_snapshot_store",
+    "property": "return_postcondition",
+    "formal": "output == None or output == value"
+  },
+  {
+    "scope": "precondition",
+    "function": "ttl_snapshot_store",
+    "property": "valid_input",
+    "formal": "isinstance(entries, dict) and all(isinstance(k, str) and isinstance(v, tuple) and len(v) == 2 for k, v in entries.items()) and isinstance(key, str) and isinstance(now, (int, float))"
+  }
+]

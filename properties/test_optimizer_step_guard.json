@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "optimizer_step_guard",
+    "property": "non_negative_loss",
+    "formal": "loss_value >= 0"
+  },
+  {
+    "scope": "branch",
+    "function": "optimizer_step_guard",
+    "condition": "loss_value < 0",
+    "property": "raises_exception",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "optimizer_step_guard",
+    "condition": "math.isnan(loss_value)",
+    "property": "nan_handling",
+    "formal": "returns False"
+  },
+  {
+    "scope": "branch",
+    "function": "optimizer_step_guard",
+    "condition": "loss_value == loss_value and loss_value > max_loss",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "optimizer_step_guard",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return False"
+  },
+  {
+    "scope": "return",
+    "function": "optimizer_step_guard",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return True"
+  }
+]

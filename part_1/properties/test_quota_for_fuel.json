@@ -1,0 +1,54 @@
+[
+  {
+    "scope": "function",
+    "function": "quota_for_fuel",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_fuel",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'total must be non-negative'"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_fuel",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'minimum must be non-negative'"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_fuel",
+    "condition": "not weights",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'no weights provided'"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_fuel",
+    "condition": "not any(weights)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'all weights are zero'"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_fuel",
+    "property": "loop_invariant",
+    "formal": "for all i in range(len(weights)), allocations[i] >= minimum"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_fuel",
+    "property": "loop_invariant",
+    "formal": "sum(allocations) <= total"
+  },
+  {
+    "scope": "return",
+    "function": "quota_for_fuel",
+    "property": "return_postcondition",
+    "formal": "all(isinstance(x, int) for x in allocations) and all(x >= minimum for x in allocations) and sum(allocations) <= total"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "stream_joiner",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right) - (1 if left and right and out and out[-1] == left[-1] == right[-1] else 0)"
+  },
+  {
+    "scope": "loop",
+    "function": "stream_joiner",
+    "property": "loop_invariant",
+    "formal": "out == sorted(left[:i] + right[:j]) and all(out[k] <= (left[i] if i < len(left) else float('inf')) for k in range(len(out))) and all(out[k] <= (right[j] if j < len(right) else float('inf')) for k in range(len(out)))"
+  },
+  {
+    "scope": "branch",
+    "function": "stream_joiner",
+    "condition": "left[i] <= right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition: if left[i] <= right[j], then left[i] is appended to out, else right[j] is appended"
+  },
+  {
+    "scope": "branch",
+    "function": "stream_joiner",
+    "condition": "out and left and right and out[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition: if out[-1] == left[-1] == right[-1], then the last element is removed from out"
+  },
+  {
+    "scope": "return",
+    "function": "stream_joiner",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return sorted(left + right) if not (left and right and out and out[-1] == left[-1] == right[-1]) else sorted(left + right)[:-1]"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "storage_mix",
+    "property": "preserves_length",
+    "formal": "len(output) == len(current)"
+  },
+  {
+    "scope": "branch",
+    "function": "storage_mix",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "storage_mix",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "storage_mix",
+    "property": "loop_invariant",
+    "formal": "all(0 <= adjusted[i] <= 1 for i in range(len(current))) if all(0 <= c <= 1 and 0 <= t <= 1 for c, t in zip(current, target))"
+  },
+  {
+    "scope": "return",
+    "function": "storage_mix",
+    "property": "return_postcondition",
+    "formal": "sum(adjusted) == sum(current) + damping * (sum(target) - sum(current))"
+  }
+]

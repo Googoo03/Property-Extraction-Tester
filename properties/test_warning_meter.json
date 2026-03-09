@@ -1,0 +1,46 @@
+[
+  {
+    "scope": "function",
+    "function": "warning_meter",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "warning_meter",
+    "condition": "cap is not None and counters[key] > cap",
+    "property": "branch_specific_behavior",
+    "formal": "output[counters[key]] == cap"
+  },
+  {
+    "scope": "return",
+    "function": "warning_meter",
+    "property": "return_postcondition",
+    "formal": "return counters[key]"
+  },
+  {
+    "scope": "precondition",
+    "function": "warning_meter",
+    "property": "input_validity",
+    "formal": "isinstance(counters, dict) and isinstance(key, str)"
+  },
+  {
+    "scope": "function",
+    "function": "warning_meter",
+    "property": "cap_clamping",
+    "formal": "cap is None or counters[key] <= cap"
+  },
+  {
+    "scope": "branch",
+    "function": "warning_meter",
+    "condition": "cap is not None and counters[key] >= cap",
+    "property": "branch_specific_behavior",
+    "formal": "counters[key] == cap"
+  },
+  {
+    "scope": "return",
+    "function": "warning_meter",
+    "property": "return_value",
+    "formal": "return_value == counters[key]"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "scope": "function",
+    "function": "probability_curve",
+    "property": "preserves_length",
+    "formal": "len([x0, y0, x1, y1, x, clamp]) == len([x0, y0, x1, y1, x, clamp])"
+  },
+  {
+    "scope": "branch",
+    "function": "probability_curve",
+    "condition": "x1 == x0",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "probability_curve",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "probability_curve",
+    "condition": "y < lo",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "probability_curve",
+    "condition": "y > hi",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "probability_curve",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return y"
+  }
+]

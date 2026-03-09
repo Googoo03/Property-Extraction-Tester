@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "temperature_window_avg",
+    "property": "preserves_length",
+    "formal": "len(values) == len(values)"
+  },
+  {
+    "scope": "branch",
+    "function": "temperature_window_avg",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "temperature_window_avg",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "temperature_window_avg",
+    "condition": "len(tail) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "temperature_window_avg",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "temperature_window_avg",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return mean"
+  }
+]

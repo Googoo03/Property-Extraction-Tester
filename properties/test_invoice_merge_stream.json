@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "invoice_merge_stream",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right) - (1 if left and right and left[-1] == right[-1] else 0)"
+  },
+  {
+    "scope": "loop",
+    "function": "invoice_merge_stream",
+    "property": "loop_invariant",
+    "formal": "all(merged[i] <= merged[i+1] for i in range(len(merged)-1)) and set(merged) == set(left[:i] + right[:j])"
+  },
+  {
+    "scope": "branch",
+    "function": "invoice_merge_stream",
+    "condition": "left[i] < right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == left[i] if merged else True"
+  },
+  {
+    "scope": "branch",
+    "function": "invoice_merge_stream",
+    "condition": "right[j] < left[i]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == right[j] if merged else True"
+  },
+  {
+    "scope": "branch",
+    "function": "invoice_merge_stream",
+    "condition": "left[i] == right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == left[i] and merged[-2] == right[j] if len(merged) >= 2 else True"
+  },
+  {
+    "scope": "branch",
+    "function": "invoice_merge_stream",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] != left[-1] if merged and left and right and left[-1] == right[-1] else True"
+  },
+  {
+    "scope": "return",
+    "function": "invoice_merge_stream",
+    "property": "return_postcondition",
+    "formal": "all(merged[i] <= merged[i+1] for i in range(len(merged)-1)) and set(merged) == set(left) | set(right)"
+  }
+]

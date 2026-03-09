@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "subsidy_payout",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "subsidy_payout",
+    "condition": "not ratios",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('ratios required')"
+  },
+  {
+    "scope": "branch",
+    "function": "subsidy_payout",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative amount')"
+  },
+  {
+    "scope": "branch",
+    "function": "subsidy_payout",
+    "condition": "total_ratio <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid ratios')"
+  },
+  {
+    "scope": "loop",
+    "function": "subsidy_payout",
+    "property": "loop_invariant",
+    "formal": "sum(shares) == amount"
+  },
+  {
+    "scope": "return",
+    "function": "subsidy_payout",
+    "property": "return_postcondition",
+    "formal": "all(s >= -fee for s in output) and sum(output) == amount - len(ratios) * fee"
+  },
+  {
+    "scope": "loop",
+    "function": "subsidy_payout",
+    "property": "loop_invariant",
+    "formal": "sum(shares) == amount"
+  }
+]

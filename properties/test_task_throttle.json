@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "task_throttle",
+    "property": "preserves_length",
+    "formal": "len(output) == 2"
+  },
+  {
+    "scope": "loop",
+    "function": "task_throttle",
+    "property": "loop_invariant",
+    "formal": "all(t >= window_start for t in recent)"
+  },
+  {
+    "scope": "branch",
+    "function": "task_throttle",
+    "condition": "len(recent) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0) if len(recent) > limit else output == (True, limit - len(recent))"
+  },
+  {
+    "scope": "return",
+    "function": "task_throttle",
+    "property": "return_postcondition",
+    "formal": "return False, 0 if len(recent) > limit else return True, limit - len(recent)"
+  },
+  {
+    "scope": "return",
+    "function": "task_throttle",
+    "property": "return_postcondition",
+    "formal": "return True, limit - len(recent) if len(recent) <= limit else return False, 0"
+  }
+]

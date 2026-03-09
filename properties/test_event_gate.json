@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "event_gate",
+    "property": "preserves_length",
+    "formal": "len(timestamps) == len([t for t in timestamps if t >= now - window]) + len([t for t in timestamps if t < now - window])"
+  },
+  {
+    "scope": "loop",
+    "function": "event_gate",
+    "property": "loop_invariant",
+    "formal": "all(t >= now - window for t in recent)"
+  },
+  {
+    "scope": "branch",
+    "function": "event_gate",
+    "condition": "len(recent) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0) if len(recent) > limit else output == (True, limit - len(recent))"
+  },
+  {
+    "scope": "return",
+    "function": "event_gate",
+    "property": "return_postcondition",
+    "formal": "output == (False, 0) if len(recent) > limit else output == (True, limit - len(recent))"
+  },
+  {
+    "scope": "return",
+    "function": "event_gate",
+    "property": "return_postcondition",
+    "formal": "output[0] == (len(recent) <= limit)"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "scope": "function",
+    "function": "quota_for_inventory",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_inventory",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('total must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_inventory",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('minimum must be non-negative')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_inventory",
+    "condition": "not weights",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('no weights provided')"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_inventory",
+    "condition": "not any(weights)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('all weights are zero')"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_inventory",
+    "property": "loop_invariant",
+    "formal": "sum(planned) == total"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_inventory",
+    "property": "loop_invariant",
+    "formal": "all(x >= minimum for x in planned)"
+  },
+  {
+    "scope": "return",
+    "function": "quota_for_inventory",
+    "property": "return_postcondition",
+    "formal": "all(isinstance(x, int) for x in allocations) and all(x >= minimum for x in allocations)"
+  }
+]

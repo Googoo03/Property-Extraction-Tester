@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "ids_merge",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "ids_merge",
+    "property": "loop_invariant",
+    "formal": "merged is always sorted and contains all elements from left[:i] and right[:j]"
+  },
+  {
+    "scope": "branch",
+    "function": "ids_merge",
+    "condition": "left[i] <= right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "when condition is true, left[i] is appended to merged"
+  },
+  {
+    "scope": "branch",
+    "function": "ids_merge",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "when condition is true, last element is removed from merged"
+  },
+  {
+    "scope": "return",
+    "function": "ids_merge",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return merged"
+  }
+]

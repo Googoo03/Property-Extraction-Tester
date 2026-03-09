@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "reservation_overlap_check",
+    "property": "preserves_length",
+    "formal": "len(reservations) == len(reservations)"
+  },
+  {
+    "scope": "branch",
+    "function": "reservation_overlap_check",
+    "condition": "c_start >= c_end",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "loop",
+    "function": "reservation_overlap_check",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "branch",
+    "function": "reservation_overlap_check",
+    "condition": "not (c_end <= start or c_start >= end)",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "reservation_overlap_check",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return True"
+  },
+  {
+    "scope": "return",
+    "function": "reservation_overlap_check",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return False"
+  }
+]

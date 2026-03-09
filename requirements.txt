@@ -1,2 +1,6 @@
 tree-sitter
 tree-sitter-python
+numpy
+hypothesis
+requests
+pytest

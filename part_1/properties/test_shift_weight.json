@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "shift_weight",
+    "property": "preserves_length",
+    "formal": "len(output) == len(current)"
+  },
+  {
+    "scope": "branch",
+    "function": "shift_weight",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "shift_weight",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "shift_weight",
+    "property": "loop_invariant",
+    "formal": "updated[idx] == current[idx] + (target[idx] - current[idx]) * damping for each idx"
+  },
+  {
+    "scope": "return",
+    "function": "shift_weight",
+    "property": "return_postcondition",
+    "formal": "isinstance(output, list) and all(isinstance(x, (int, float)) for x in output)"
+  }
+]
