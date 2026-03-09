@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "function",
+    "function": "message_counter",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "message_counter",
+    "condition": "cap is not None and counters[key] > cap",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == cap"
+  },
+  {
+    "scope": "branch",
+    "function": "message_counter",
+    "condition": "cap is not None and counters[key] <= cap",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == input[key] + 1"
+  },
+  {
+    "scope": "branch",
+    "function": "message_counter",
+    "condition": "cap is None",
+    "property": "branch_specific_behavior",
+    "formal": "output[key] == input[key] + 1"
+  },
+  {
+    "scope": "return",
+    "function": "message_counter",
+    "property": "return_postcondition",
+    "formal": "return counters[key]"
+  },
+  {
+    "scope": "function",
+    "function": "message_counter",
+    "property": "initializes_key",
+    "formal": "key in output"
+  },
+  {
+    "scope": "function",
+    "function": "message_counter",
+    "property": "increments_value",
+    "formal": "output[key] >= input.get(key, 0) + 1"
+  }
+]

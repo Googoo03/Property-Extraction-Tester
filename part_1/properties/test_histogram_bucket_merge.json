@@ -1,0 +1,48 @@
+[
+  {
+    "scope": "function",
+    "function": "histogram_bucket_merge",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "histogram_bucket_merge",
+    "property": "loop_invariant",
+    "formal": "all(merged[i] <= merged[i+1] for i in range(len(merged)-1)) and merged == sorted(left[:i] + right[:j])"
+  },
+  {
+    "scope": "branch",
+    "function": "histogram_bucket_merge",
+    "condition": "left[i] < right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == left[i-1] if merged else True"
+  },
+  {
+    "scope": "branch",
+    "function": "histogram_bucket_merge",
+    "condition": "right[j] < left[i]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] == right[j-1] if merged else True"
+  },
+  {
+    "scope": "branch",
+    "function": "histogram_bucket_merge",
+    "condition": "left[i] == right[j]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-2:] == [left[i-1], right[j-1]] if len(merged) >= 2 else True"
+  },
+  {
+    "scope": "branch",
+    "function": "histogram_bucket_merge",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "merged[-1] != left[-1]"
+  },
+  {
+    "scope": "return",
+    "function": "histogram_bucket_merge",
+    "property": "return_postcondition",
+    "formal": "sorted(merged) == sorted(left + right)"
+  }
+]

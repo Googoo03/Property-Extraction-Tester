@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "royalty_payout",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "royalty_payout",
+    "condition": "not ratios",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('ratios required')"
+  },
+  {
+    "scope": "branch",
+    "function": "royalty_payout",
+    "condition": "amount < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative amount')"
+  },
+  {
+    "scope": "branch",
+    "function": "royalty_payout",
+    "condition": "total_ratio <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('invalid ratios')"
+  },
+  {
+    "scope": "loop",
+    "function": "royalty_payout",
+    "property": "loop_invariant",
+    "formal": "all(s >= 0 for s in shares) and sum(shares) == amount"
+  },
+  {
+    "scope": "return",
+    "function": "royalty_payout",
+    "property": "return_postcondition",
+    "formal": "all(s >= -fee for s in output) and sum(output) == amount - len(ratios) * fee"
+  }
+]

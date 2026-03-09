@@ -1,0 +1,53 @@
+[
+  {
+    "scope": "function",
+    "function": "gradient_clip_budget",
+    "property": "preserves_length",
+    "formal": "len(output) == len(gradients)"
+  },
+  {
+    "scope": "branch",
+    "function": "gradient_clip_budget",
+    "condition": "max_norm <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError with message 'max_norm must be positive'"
+  },
+  {
+    "scope": "branch",
+    "function": "gradient_clip_budget",
+    "condition": "not gradients",
+    "property": "branch_specific_behavior",
+    "formal": "returns []"
+  },
+  {
+    "scope": "return",
+    "function": "gradient_clip_budget",
+    "property": "return_postcondition",
+    "formal": "returns []"
+  },
+  {
+    "scope": "branch",
+    "function": "gradient_clip_budget",
+    "condition": "norm > max_norm",
+    "property": "branch_specific_behavior",
+    "formal": "returns [g * scale for g in gradients] where scale = max_norm / (norm - 1e-12)"
+  },
+  {
+    "scope": "return",
+    "function": "gradient_clip_budget",
+    "property": "return_postcondition",
+    "formal": "returns [g * scale for g in gradients] where scale = max_norm / (norm - 1e-12)"
+  },
+  {
+    "scope": "loop",
+    "function": "gradient_clip_budget",
+    "property": "loop_invariant",
+    "formal": "norm_sq = sum(g * g for g in gradients) is invariant throughout loop execution"
+  },
+  {
+    "scope": "return",
+    "function": "gradient_clip_budget",
+    "property": "return_postcondition",
+    "formal": "returns list(gradients)"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "load_mix",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "load_mix",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when current and target lengths differ"
+  },
+  {
+    "scope": "branch",
+    "function": "load_mix",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when current is empty"
+  },
+  {
+    "scope": "loop",
+    "function": "load_mix",
+    "property": "loop_invariant",
+    "formal": "each adjusted value equals c + (t - c) * damping for corresponding elements"
+  },
+  {
+    "scope": "return",
+    "function": "load_mix",
+    "property": "return_postcondition",
+    "formal": "returns list of adjusted values with same length as input"
+  }
+]

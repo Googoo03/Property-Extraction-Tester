@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "tiers_stream",
+    "property": "preserves_length",
+    "formal": "len(output) == len(left) + len(right)"
+  },
+  {
+    "scope": "loop",
+    "function": "tiers_stream",
+    "property": "loop_invariant",
+    "formal": "merged is always sorted and contains all elements from left[:li] and right[:ri]"
+  },
+  {
+    "scope": "branch",
+    "function": "tiers_stream",
+    "condition": "left[li] < right[ri]",
+    "property": "branch_specific_behavior",
+    "formal": "when true, left[li] is appended to merged and li is incremented"
+  },
+  {
+    "scope": "branch",
+    "function": "tiers_stream",
+    "condition": "merged and left and right and merged[-1] == left[-1] == right[-1]",
+    "property": "branch_specific_behavior",
+    "formal": "when true, the last element is removed from merged"
+  },
+  {
+    "scope": "return",
+    "function": "tiers_stream",
+    "property": "return_postcondition",
+    "formal": "returns merged which is sorted and contains all elements from left and right except possibly one duplicate"
+  }
+]

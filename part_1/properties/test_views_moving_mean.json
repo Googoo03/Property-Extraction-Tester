@@ -1,0 +1,53 @@
+[
+  {
+    "scope": "function",
+    "function": "views_moving_mean",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "views_moving_mean",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "views_moving_mean",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "views_moving_mean",
+    "condition": "len(recent) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "returns None"
+  },
+  {
+    "scope": "return",
+    "function": "views_moving_mean",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return None"
+  },
+  {
+    "scope": "return",
+    "function": "views_moving_mean",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return mean"
+  },
+  {
+    "scope": "function",
+    "function": "views_moving_mean",
+    "property": "correct_mean_calculation",
+    "formal": "mean == sum(values[-window:]) / window"
+  },
+  {
+    "scope": "function",
+    "function": "views_moving_mean",
+    "property": "warmup_behavior",
+    "formal": "output is None if len(values) < warmup_min else output is float"
+  }
+]

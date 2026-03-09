@@ -1,0 +1,67 @@
+[
+  {
+    "scope": "function",
+    "function": "plan_tickets_share",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_tickets_share",
+    "condition": "len(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('weights required')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_tickets_share",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative total')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_tickets_share",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('negative minimum')"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_tickets_share",
+    "condition": "sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('zero total weight')"
+  },
+  {
+    "scope": "loop",
+    "function": "plan_tickets_share",
+    "property": "loop_invariant",
+    "formal": "for each weight w in weights, portion = (w / weight_sum) * total and shares.append(portion if portion > minimum else minimum)"
+  },
+  {
+    "scope": "branch",
+    "function": "plan_tickets_share",
+    "condition": "floor_to_int",
+    "property": "branch_specific_behavior",
+    "formal": "returns [int(v) for v in shares]"
+  },
+  {
+    "scope": "return",
+    "function": "plan_tickets_share",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return [int(v) for v in shares]"
+  },
+  {
+    "scope": "loop",
+    "function": "plan_tickets_share",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "return",
+    "function": "plan_tickets_share",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return shares"
+  }
+]

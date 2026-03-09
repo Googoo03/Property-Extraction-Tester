@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "windowed_error_rate",
+    "property": "preserves_length",
+    "formal": "len([e for e in events if e[0] >= (now - window)]) == len(recent)"
+  },
+  {
+    "scope": "loop",
+    "function": "windowed_error_rate",
+    "property": "loop_invariant",
+    "formal": "all(e[0] >= (now - window) for e in recent)"
+  },
+  {
+    "scope": "branch",
+    "function": "windowed_error_rate",
+    "condition": "not recent",
+    "property": "branch_specific_behavior",
+    "formal": "output == 0.0"
+  },
+  {
+    "scope": "branch",
+    "function": "windowed_error_rate",
+    "condition": "recent",
+    "property": "branch_specific_behavior",
+    "formal": "output == sum(1 for _, is_err in recent if is_err) / len(recent)"
+  },
+  {
+    "scope": "return",
+    "function": "windowed_error_rate",
+    "property": "return_postcondition",
+    "formal": "output == 0.0 if not recent else output == sum(1 for _, is_err in recent if is_err) / len(recent)"
+  }
+]

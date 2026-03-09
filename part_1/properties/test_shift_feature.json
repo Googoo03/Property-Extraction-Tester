@@ -1,0 +1,46 @@
+[
+  {
+    "scope": "function",
+    "function": "shift_feature",
+    "property": "preserves_length",
+    "formal": "len(output) == len(current)"
+  },
+  {
+    "scope": "branch",
+    "function": "shift_feature",
+    "condition": "len(current) != len(target)",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "shift_feature",
+    "condition": "not current",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "shift_feature",
+    "property": "loop_invariant",
+    "formal": "for all i: adjusted[i] == current[i] + (target[i] - current[i]) * damping"
+  },
+  {
+    "scope": "return",
+    "function": "shift_feature",
+    "property": "return_postcondition",
+    "formal": "returns adjusted"
+  },
+  {
+    "scope": "function",
+    "function": "shift_feature",
+    "property": "damping_applied",
+    "formal": "all((a - c) / (t - c) == damping if t != c else a == c for c, t, a in zip(current, target, output))"
+  },
+  {
+    "scope": "function",
+    "function": "shift_feature",
+    "property": "no_sum_normalization",
+    "formal": "sum(output) != 1.0"
+  }
+]

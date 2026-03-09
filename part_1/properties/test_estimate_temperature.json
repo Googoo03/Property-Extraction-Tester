@@ -1,0 +1,28 @@
+[
+  {
+    "scope": "function",
+    "function": "estimate_temperature",
+    "property": "preserves_length",
+    "formal": "len([x0, y0, x1, y1, x, clamp]) == len([x0, y0, x1, y1, x, clamp])"
+  },
+  {
+    "scope": "branch",
+    "function": "estimate_temperature",
+    "condition": "x1 == x0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError('zero length')"
+  },
+  {
+    "scope": "branch",
+    "function": "estimate_temperature",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "y = min(max(y, min(y0, y1)), max(y0, y1))"
+  },
+  {
+    "scope": "return",
+    "function": "estimate_temperature",
+    "property": "return_postcondition",
+    "formal": "y == (1 - (x - x0) / (x1 - x0)) * y0 + ((x - x0) / (x1 - x0)) * y1 if not clamp else min(max((1 - (x - x0) / (x1 - x0)) * y0 + ((x - x0) / (x1 - x0)) * y1, min(y0, y1)), max(y0, y1))"
+  }
+]

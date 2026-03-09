@@ -1,0 +1,33 @@
+[
+  {
+    "scope": "function",
+    "function": "limit_ping",
+    "property": "preserves_length",
+    "formal": "len(recent) == len([t for t in timestamps if t >= now - window])"
+  },
+  {
+    "scope": "loop",
+    "function": "limit_ping",
+    "property": "loop_invariant",
+    "formal": "all(t >= now - window for t in recent)"
+  },
+  {
+    "scope": "branch",
+    "function": "limit_ping",
+    "condition": "len(recent) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0)"
+  },
+  {
+    "scope": "return",
+    "function": "limit_ping",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return False, 0"
+  },
+  {
+    "scope": "return",
+    "function": "limit_ping",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return True, limit - len(recent)"
+  }
+]

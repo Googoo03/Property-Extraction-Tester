@@ -1,0 +1,35 @@
+[
+  {
+    "scope": "function",
+    "function": "session_memo",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "session_memo",
+    "condition": "record is None",
+    "property": "branch_specific_behavior",
+    "formal": "output == default"
+  },
+  {
+    "scope": "branch",
+    "function": "session_memo",
+    "condition": "now > deadline",
+    "property": "branch_specific_behavior",
+    "formal": "output == default"
+  },
+  {
+    "scope": "branch",
+    "function": "session_memo",
+    "condition": "now <= deadline",
+    "property": "branch_specific_behavior",
+    "formal": "output == value"
+  },
+  {
+    "scope": "return",
+    "function": "session_memo",
+    "property": "return_postcondition",
+    "formal": "output == default if record is None or now > deadline else output == value"
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "scope": "function",
+    "function": "schedule_call",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_call",
+    "condition": "candidate[0] >= candidate[1]",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "function",
+    "function": "overlaps",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "return",
+    "function": "overlaps",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return not (b[1] <= a[0] or b[0] >= a[1])"
+  },
+  {
+    "scope": "loop",
+    "function": "schedule_call",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_call",
+    "condition": "overlaps(slot, candidate)",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "schedule_call",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return False, list(existing)"
+  },
+  {
+    "scope": "return",
+    "function": "schedule_call",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return True, merged"
+  },
+  {
+    "scope": "function",
+    "function": "schedule_call",
+    "property": "output_format",
+    "formal": "isinstance(output, tuple) and len(output) == 2"
+  },
+  {
+    "scope": "function",
+    "function": "schedule_call",
+    "property": "candidate_validation",
+    "formal": "candidate[0] < candidate[1] if ValueError not raised"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_call",
+    "condition": "overlaps(slot, candidate)",
+    "property": "early_exit",
+    "formal": "returns immediately upon first overlap"
+  },
+  {
+    "scope": "return",
+    "function": "schedule_call",
+    "property": "merged_list",
+    "formal": "all(existing_slots) in merged if return[0] is True"
+  },
+  {
+    "scope": "loop",
+    "function": "schedule_call",
+    "property": "iteration_completeness",
+    "formal": "all_slots_checked = len(existing) == number_of_iterations"
+  }
+]

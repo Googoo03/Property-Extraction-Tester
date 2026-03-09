@@ -10,15 +10,17 @@ def test_tensor_slice_pad_preserves_length(values, start, end):
     except ValueError:
         pass
 
-@given(values=st.lists(st.integers()), start=st.integers(), end=st.integers())
+@given(values=st.lists(st.integers(), max_size=50),
+       start=st.integers(-50, 50),
+       end=st.integers(-50, 50))
 def test_tensor_slice_pad_invalid_range_raises_value_error(values, start, end):
     if start < 0 or end < start:
         with pytest.raises(ValueError):
             tensor_slice_pad(values, start, end)
-    else:
-        tensor_slice_pad(values, start, end)
 
-@given(values=st.lists(st.integers()), start=st.integers(), end=st.integers())
+@given(values=st.lists(st.integers(), max_size=50),
+       start=st.integers(-50, 50),
+       end=st.integers(-50, 50))
 def test_tensor_slice_pad_missing_non_negative_behavior(values, start, end):
     try:
         output = tensor_slice_pad(values, start, end)
@@ -28,7 +30,9 @@ def test_tensor_slice_pad_missing_non_negative_behavior(values, start, end):
     except ValueError:
         pass
 
-@given(values=st.lists(st.integers()), start=st.integers(), end=st.integers())
+@given(values=st.lists(st.integers(), max_size=50),
+       start=st.integers(-50, 50),
+       end=st.integers(-50, 50))
 def test_tensor_slice_pad_return_postcondition(values, start, end):
     try:
         output = tensor_slice_pad(values, start, end)

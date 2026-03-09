@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "lr_warmup_schedule",
+    "property": "preserves_length",
+    "formal": "len([output]) == 1"
+  },
+  {
+    "scope": "branch",
+    "function": "lr_warmup_schedule",
+    "condition": "warmup_steps <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "lr_warmup_schedule",
+    "condition": "step < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "lr_warmup_schedule",
+    "condition": "step >= warmup_steps",
+    "property": "branch_specific_behavior",
+    "formal": "returns base_lr"
+  },
+  {
+    "scope": "return",
+    "function": "lr_warmup_schedule",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return base_lr"
+  },
+  {
+    "scope": "return",
+    "function": "lr_warmup_schedule",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return base_lr * (step / warmup_steps)"
+  }
+]

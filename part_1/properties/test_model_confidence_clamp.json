@@ -1,0 +1,58 @@
+[
+  {
+    "scope": "function",
+    "function": "model_confidence_clamp",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "model_confidence_clamp",
+    "condition": "x0 == x1",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "branch",
+    "function": "model_confidence_clamp",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "model_confidence_clamp",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return y"
+  },
+  {
+    "scope": "precondition",
+    "function": "model_confidence_clamp",
+    "property": "x0_not_equal_x1",
+    "formal": "x0 != x1"
+  },
+  {
+    "scope": "precondition",
+    "function": "model_confidence_clamp",
+    "property": "clamp_boolean",
+    "formal": "isinstance(clamp, bool)"
+  },
+  {
+    "scope": "postcondition",
+    "function": "model_confidence_clamp",
+    "property": "t_in_range",
+    "formal": "0 <= t <= 1"
+  },
+  {
+    "scope": "postcondition",
+    "function": "model_confidence_clamp",
+    "property": "y_within_bounds",
+    "formal": "low <= y <= high if clamp else True"
+  },
+  {
+    "scope": "formal_definition",
+    "function": "model_confidence_clamp",
+    "property": "linear_interpolation",
+    "formal": "y = y0 + ((x - x0) / (x1 - x0)) * (y1 - y0)"
+  }
+]

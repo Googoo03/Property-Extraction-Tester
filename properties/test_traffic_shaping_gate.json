@@ -1,0 +1,27 @@
+[
+  {
+    "scope": "function",
+    "function": "traffic_shaping_gate",
+    "property": "preserves_length",
+    "formal": "len(active) == len([t for t in timestamps if t >= now - window])"
+  },
+  {
+    "scope": "loop",
+    "function": "traffic_shaping_gate",
+    "property": "loop_invariant",
+    "formal": "all(t >= now - window for t in active)"
+  },
+  {
+    "scope": "branch",
+    "function": "traffic_shaping_gate",
+    "condition": "len(active) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0) if len(active) > limit else output == (True, limit - len(active))"
+  },
+  {
+    "scope": "return",
+    "function": "traffic_shaping_gate",
+    "property": "return_postcondition",
+    "formal": "output == (False, 0) if len(active) > limit else output == (True, limit - len(active))"
+  }
+]

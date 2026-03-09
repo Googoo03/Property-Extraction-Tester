@@ -9,4 +9,4 @@ python -m pip install --upgrade pip
 pip install --upgrade -r requirements.txt
 
 #run all tests
-python -m pytest tests/
+python -m pytest tests/ -v > hypothesisRunTest_output.txt

@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "warm_cache_loader",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "warm_cache_loader",
+    "condition": "item is None",
+    "property": "branch_specific_behavior",
+    "formal": "output == None"
+  },
+  {
+    "scope": "return",
+    "function": "warm_cache_loader",
+    "property": "return_postcondition",
+    "formal": "output == None"
+  },
+  {
+    "scope": "branch",
+    "function": "warm_cache_loader",
+    "condition": "now > expires_at",
+    "property": "branch_specific_behavior",
+    "formal": "output == None"
+  },
+  {
+    "scope": "return",
+    "function": "warm_cache_loader",
+    "property": "return_postcondition",
+    "formal": "output == None"
+  },
+  {
+    "scope": "return",
+    "function": "warm_cache_loader",
+    "property": "return_postcondition",
+    "formal": "output == value"
+  }
+]

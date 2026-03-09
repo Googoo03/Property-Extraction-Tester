@@ -1,0 +1,60 @@
+[
+  {
+    "scope": "function",
+    "function": "estimate_reliability",
+    "property": "raises_error_on_equal_x",
+    "formal": "raises ValueError if x0 == x1"
+  },
+  {
+    "scope": "branch",
+    "function": "estimate_reliability",
+    "condition": "x0 == x1",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when x0 equals x1"
+  },
+  {
+    "scope": "branch",
+    "function": "estimate_reliability",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on clamp value"
+  },
+  {
+    "scope": "branch",
+    "function": "estimate_reliability",
+    "condition": "y < lo",
+    "property": "branch_specific_behavior",
+    "formal": "clamps y to lo when y < lo"
+  },
+  {
+    "scope": "branch",
+    "function": "estimate_reliability",
+    "condition": "y > hi",
+    "property": "branch_specific_behavior",
+    "formal": "clamps y to hi when y > hi"
+  },
+  {
+    "scope": "return",
+    "function": "estimate_reliability",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return y"
+  },
+  {
+    "scope": "function",
+    "function": "estimate_reliability",
+    "property": "linear_interpolation",
+    "formal": "y == y0 + (x - x0) / (x1 - x0) * (y1 - y0)"
+  },
+  {
+    "scope": "function",
+    "function": "estimate_reliability",
+    "property": "clamp_bounds",
+    "formal": "if clamp: y in [min(y0, y1), max(y0, y1)]"
+  },
+  {
+    "scope": "function",
+    "function": "estimate_reliability",
+    "property": "no_clamp_out_of_bounds",
+    "formal": "if not clamp: y can be outside [min(y0, y1), max(y0, y1)]"
+  }
+]

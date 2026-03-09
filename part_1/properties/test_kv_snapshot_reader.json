@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "kv_snapshot_reader",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "loop",
+    "function": "kv_snapshot_reader",
+    "property": "loop_invariant",
+    "formal": "all(k <= key for k, v in snapshot[:i]) or any(k == key for k, v in snapshot[:i])"
+  },
+  {
+    "scope": "branch",
+    "function": "kv_snapshot_reader",
+    "condition": "k == key",
+    "property": "branch_specific_behavior",
+    "formal": "output == v if k == key else output == default"
+  },
+  {
+    "scope": "return",
+    "function": "kv_snapshot_reader",
+    "property": "return_postcondition",
+    "formal": "output == v if k == key else output == default"
+  },
+  {
+    "scope": "branch",
+    "function": "kv_snapshot_reader",
+    "condition": "k > key",
+    "property": "branch_specific_behavior",
+    "formal": "output == default if k > key else output == v or output == default"
+  },
+  {
+    "scope": "return",
+    "function": "kv_snapshot_reader",
+    "property": "return_postcondition",
+    "formal": "output == default"
+  }
+]

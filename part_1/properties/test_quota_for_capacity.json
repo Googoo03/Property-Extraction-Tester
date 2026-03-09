@@ -1,0 +1,67 @@
+[
+  {
+    "scope": "function",
+    "function": "quota_for_capacity",
+    "property": "preserves_length",
+    "formal": "len(output) == len(weights)"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_capacity",
+    "condition": "len(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_capacity",
+    "condition": "total < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_capacity",
+    "condition": "minimum < 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_capacity",
+    "condition": "sum(weights) == 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_capacity",
+    "property": "loop_invariant",
+    "formal": "each iteration computes portion = (w / weight_sum) * total and appends portion if portion > minimum else minimum"
+  },
+  {
+    "scope": "branch",
+    "function": "quota_for_capacity",
+    "condition": "floor_to_int",
+    "property": "branch_specific_behavior",
+    "formal": "returns [int(v) for v in shares]"
+  },
+  {
+    "scope": "return",
+    "function": "quota_for_capacity",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return [int(v) for v in shares]"
+  },
+  {
+    "scope": "loop",
+    "function": "quota_for_capacity",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "return",
+    "function": "quota_for_capacity",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return shares"
+  }
+]

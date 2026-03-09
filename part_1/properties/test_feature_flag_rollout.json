@@ -1,0 +1,46 @@
+[
+  {
+    "scope": "function",
+    "function": "feature_flag_rollout",
+    "property": "preserves_length",
+    "formal": "len(output) == len(input)"
+  },
+  {
+    "scope": "branch",
+    "function": "feature_flag_rollout",
+    "condition": "not (0 <= percentage <= 1)",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "feature_flag_rollout",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return bucket > percentage"
+  },
+  {
+    "scope": "exception",
+    "function": "feature_flag_rollout",
+    "property": "raises_value_error",
+    "formal": "raises ValueError when percentage not in [0, 1]"
+  },
+  {
+    "scope": "branch",
+    "function": "feature_flag_rollout",
+    "condition": "0 <= percentage <= 1",
+    "property": "percentage_in_range",
+    "formal": "percentage in [0, 1] allows execution"
+  },
+  {
+    "scope": "return",
+    "function": "feature_flag_rollout",
+    "property": "bucket_calculation",
+    "formal": "bucket = (hash(user_id) % 100) / 100.0"
+  },
+  {
+    "scope": "return",
+    "function": "feature_flag_rollout",
+    "property": "inverted_rollout",
+    "formal": "return bucket > percentage (inverted logic)"
+  }
+]

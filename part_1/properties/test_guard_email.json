@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "function",
+    "function": "guard_email",
+    "property": "preserves_length",
+    "formal": "len(recent) <= len(timestamps)"
+  },
+  {
+    "scope": "loop",
+    "function": "guard_email",
+    "property": "loop_invariant",
+    "formal": "all(t >= cutoff for t in recent)"
+  },
+  {
+    "scope": "branch",
+    "function": "guard_email",
+    "condition": "len(recent) > limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (False, 0)"
+  },
+  {
+    "scope": "branch",
+    "function": "guard_email",
+    "condition": "len(recent) <= limit",
+    "property": "branch_specific_behavior",
+    "formal": "output == (True, limit - len(recent))"
+  },
+  {
+    "scope": "return",
+    "function": "guard_email",
+    "property": "return_postcondition",
+    "formal": "isinstance(output, tuple) and len(output) == 2 and isinstance(output[0], bool) and isinstance(output[1], int)"
+  }
+]

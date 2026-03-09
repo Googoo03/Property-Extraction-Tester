@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "function",
+    "function": "schedule_window",
+    "property": "preserves_length",
+    "formal": "len(output) == len(existing) + 1"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_window",
+    "condition": "start >= end",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "loop",
+    "function": "schedule_window",
+    "property": "loop_invariant",
+    "formal": "iteration preserves semantic rule"
+  },
+  {
+    "scope": "branch",
+    "function": "schedule_window",
+    "condition": "not (end <= s or start >= e)",
+    "property": "branch_specific_behavior",
+    "formal": "output behavior depends on condition"
+  },
+  {
+    "scope": "return",
+    "function": "schedule_window",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return False, existing"
+  },
+  {
+    "scope": "return",
+    "function": "schedule_window",
+    "property": "return_postcondition",
+    "formal": "returns value satisfying expected semantics: return True, updated"
+  }
+]

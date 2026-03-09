@@ -1,0 +1,41 @@
+[
+  {
+    "scope": "function",
+    "function": "packets_window_avg",
+    "property": "preserves_length",
+    "formal": "len(values) == len(values)"
+  },
+  {
+    "scope": "branch",
+    "function": "packets_window_avg",
+    "condition": "window <= 0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "packets_window_avg",
+    "condition": "not values",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError"
+  },
+  {
+    "scope": "branch",
+    "function": "packets_window_avg",
+    "condition": "len(recent) < warmup_min",
+    "property": "branch_specific_behavior",
+    "formal": "returns None"
+  },
+  {
+    "scope": "return",
+    "function": "packets_window_avg",
+    "property": "return_postcondition",
+    "formal": "is None or isinstance(return_value, (int, float))"
+  },
+  {
+    "scope": "return",
+    "function": "packets_window_avg",
+    "property": "return_postcondition",
+    "formal": "is None or abs(return_value - sum(values[-window:]) / window) < 1e-9"
+  }
+]

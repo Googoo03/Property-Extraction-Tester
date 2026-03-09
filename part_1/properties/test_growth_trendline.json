@@ -1,0 +1,60 @@
+[
+  {
+    "scope": "function",
+    "function": "growth_trendline",
+    "property": "raises_error_on_degenerate_segment",
+    "formal": "raises ValueError when x1 == x0"
+  },
+  {
+    "scope": "branch",
+    "function": "growth_trendline",
+    "condition": "x1 == x0",
+    "property": "branch_specific_behavior",
+    "formal": "raises ValueError when x1 == x0"
+  },
+  {
+    "scope": "branch",
+    "function": "growth_trendline",
+    "condition": "clamp",
+    "property": "branch_specific_behavior",
+    "formal": "output clamped to [min(y0,y1), max(y0,y1)] when clamp=True"
+  },
+  {
+    "scope": "branch",
+    "function": "growth_trendline",
+    "condition": "y < lo",
+    "property": "branch_specific_behavior",
+    "formal": "output set to lo when y < lo and clamp=True"
+  },
+  {
+    "scope": "branch",
+    "function": "growth_trendline",
+    "condition": "y > hi",
+    "property": "branch_specific_behavior",
+    "formal": "output set to hi when y > hi and clamp=True"
+  },
+  {
+    "scope": "return",
+    "function": "growth_trendline",
+    "property": "return_postcondition",
+    "formal": "returns linear interpolation value y = y0 + ((x-x0)/(x1-x0)) * (y1-y0)"
+  },
+  {
+    "scope": "function",
+    "function": "growth_trendline",
+    "property": "correct_interpolation",
+    "formal": "output equals y0 + ((x-x0)/(x1-x0)) * (y1-y0) when x1 != x0"
+  },
+  {
+    "scope": "function",
+    "function": "growth_trendline",
+    "property": "clamp_uses_y_range",
+    "formal": "clamp bounds are min(y0,y1) and max(y0,y1)"
+  },
+  {
+    "scope": "function",
+    "function": "growth_trendline",
+    "property": "no_clamp_by_default",
+    "formal": "clamp=False results in unclamped linear interpolation"
+  }
+]
